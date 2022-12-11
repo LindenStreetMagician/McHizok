@@ -4,7 +4,7 @@ namespace McHizok.Entities.Extensions;
 
 public static class WebDriverExtensions
 {
-    public static IWebElement? GetElementAndScrollTo(this IWebDriver driver, By by)
+    public static IWebElement GetElementAndScrollTo(this IWebDriver driver, By by)
     {
         var js = (IJavaScriptExecutor)driver;
         try
