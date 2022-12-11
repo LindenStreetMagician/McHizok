@@ -5,7 +5,7 @@
     "firstAnswerXPath": "/html/body/section[1]/div/form/div[15]/div[5]/div[1]/div[2]/span",
     "submitButtonXPath": "/html/body/section[1]/div/form/div[49]/div[3]/button",
     "codeInvalidBlockXPath": "/html/body/div/div/div/section/div[2]/div/div[3]/div",
-    "couponXPath": "/html/body/div/div/div/section/div[3]/div[2]/div[2]",
+    "couponXPath": "/html/body/div[1]/div/div/section/div[3]/div[2]/div[2]/div[2]/div[1]/canvas",
     "form": [
         {
             "questionText": "A legutóbbi látogatásod alapján összességében mennyire voltál elégedett?",

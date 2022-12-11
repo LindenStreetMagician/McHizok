@@ -17,8 +17,10 @@ public class ApplePieService : IApplePieService
         var form = ReadFormConfig();
 
         var chromeOptions = new ChromeOptions();
+        chromeOptions.AddArguments("--headless");
 
         using var webDriver = new ChromeDriver(chromeOptions);
+
         var wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(60));
 
         webDriver.Url = form.FormUrl;
@@ -66,7 +68,7 @@ public class ApplePieService : IApplePieService
         var elementToScreen = wait.Until(webDriver => webDriver.GetElementAndScrollTo(By.XPath(form.CouponXPath)));
 
         var elementScreenshot = (elementToScreen as ITakesScreenshot)!.GetScreenshot();
-        var fileName = $"{DateTime.Now.ToString("yyyy-M-dd--HH--mm--ss")}.jpeg";
+        var fileName = $"expiration {DateTime.Now.AddDays(7).ToString("yyyy-M-dd--HH--mm--ss")}.jpeg";
 
         var couponBytes = Convert.FromBase64String(elementScreenshot.AsBase64EncodedString);
 
