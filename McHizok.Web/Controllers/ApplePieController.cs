@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace McHizok.Web.Controllers;
 
-[ApiController]
 [Route("/api/applepies")]
+[ApiController]
 public class ApplePieController : ControllerBase
 {
     private readonly IApplePieService _applePieService;
