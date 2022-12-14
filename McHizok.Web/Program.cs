@@ -1,10 +1,12 @@
-using McHizok.Services;
-using McHizok.Services.Interfaces;
-using McHizok.Web.Data;
 using McHizok.Web.Extensions;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
