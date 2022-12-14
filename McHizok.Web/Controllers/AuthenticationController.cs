@@ -9,6 +9,7 @@ namespace McHizok.Web.Controllers;
 public class AuthenticationController : ControllerBase
 {
     private readonly IAuthenticationService _authenticationService;
+
     public AuthenticationController(IAuthenticationService authenticationService)
     {
         _authenticationService = authenticationService;
@@ -35,5 +36,20 @@ public class AuthenticationController : ControllerBase
         }
 
         return StatusCode(201);
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto userForAuthentication)
+    {
+        if (userForAuthentication is null)
+            return BadRequest("userForAuthentication cannot be null.");
+
+        if (!ModelState.IsValid)
+            return UnprocessableEntity(ModelState);
+
+        if (!await _authenticationService.ValidateUser(userForAuthentication))
+            return Unauthorized();
+
+        return Ok(new { Token = await _authenticationService.CreateToken() });
     }
 }
