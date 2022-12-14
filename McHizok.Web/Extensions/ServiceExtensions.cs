@@ -9,8 +9,11 @@ namespace McHizok.Web.Extensions;
 
 public static class ServiceExtensions
 {
-    public static void ConfigureServices(this IServiceCollection services) =>
+    public static void ConfigureServices(this IServiceCollection services)
+    {
         services.AddScoped<IApplePieService, ApplePieService>();
+        services.AddScoped<IAuthenticationService, AuthenticationService>();
+    }
 
     public static void ConfigureSqlContext(this IServiceCollection services) =>
         services.AddDbContext<McHizokDbContext>(options =>
