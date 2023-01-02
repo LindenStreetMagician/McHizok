@@ -22,5 +22,4 @@ public class ApplePieController : ControllerBase
 
         return Ok(coupon);
     }
-    }
 }
