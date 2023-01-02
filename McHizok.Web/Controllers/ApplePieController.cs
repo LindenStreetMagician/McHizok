@@ -8,6 +8,7 @@ namespace McHizok.Web.Controllers;
 public class ApplePieController : ControllerBase
 {
     private readonly IApplePieService _applePieService;
+
     public ApplePieController(IApplePieService applePieService)
     {
         _applePieService = applePieService;
@@ -15,10 +16,11 @@ public class ApplePieController : ControllerBase
 
     //TODO: Add block code format validation
     [HttpGet]
-    public async Task<IActionResult> GetCoupon([FromQuery]string blockCode)
+    public async Task<IActionResult> GetCoupon([FromQuery] string blockCode)
     {
         var coupon = await _applePieService.GetApplePieCoupon(blockCode);
 
-        return File(coupon.Content, "image/jpeg", coupon.FileName);
+        return Ok(coupon);
+    }
     }
 }

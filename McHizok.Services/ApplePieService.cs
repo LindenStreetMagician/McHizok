@@ -68,13 +68,13 @@ public class ApplePieService : IApplePieService
         var elementToScreen = wait.Until(webDriver => webDriver.GetElementAndScrollTo(By.XPath(form.CouponXPath)));
 
         var elementScreenshot = (elementToScreen as ITakesScreenshot)!.GetScreenshot();
-        var fileName = $"expiration {DateTime.Now.AddDays(7).ToString("yyyy-M-dd--HH--mm--ss")}.jpeg";
+        var fileName = $"lejár {DateTime.Now.AddDays(7).ToString("MM-dd--HH--mm--ss")}.jpeg";
 
-        var couponBytes = Convert.FromBase64String(elementScreenshot.AsBase64EncodedString);
+        var base64CouponContent = elementScreenshot.AsBase64EncodedString;
 
         webDriver.Quit();
 
-        return new Coupon { Content = couponBytes, FileName = fileName };
+        return new Coupon { Base64Content = base64CouponContent, FileName = fileName };
     }
 
     private Form ReadFormConfig()
