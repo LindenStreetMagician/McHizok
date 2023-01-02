@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { ApplePieComponent } from './apple-pie/apple-pie.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpLoadingInterceptor } from './interceptors/http-loading.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { HttpLoadingInterceptor } from './interceptors/http-loading.interceptor'
   imports: [
     FormsModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     NgxSpinnerModule,
     HttpClientModule,
     AppRoutingModule
