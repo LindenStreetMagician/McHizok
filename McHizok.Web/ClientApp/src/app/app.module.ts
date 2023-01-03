@@ -9,11 +9,13 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpLoadingInterceptor } from './interceptors/http-loading.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { GlobalErrorHandler } from './global-error-handler';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ApplePieComponent
+    ApplePieComponent,
+    LoginComponent
   ],
   imports: [
     FormsModule,
