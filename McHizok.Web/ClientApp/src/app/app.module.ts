@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -8,6 +8,7 @@ import { ApplePieComponent } from './apple-pie/apple-pie.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpLoadingInterceptor } from './interceptors/http-loading.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { GlobalErrorHandler } from './global-error-handler';
 
 @NgModule({
   declarations: [
@@ -17,13 +18,16 @@ import { ToastrModule } from 'ngx-toastr';
   imports: [
     FormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    }),
     NgxSpinnerModule,
     HttpClientModule,
     AppRoutingModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpLoadingInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: HttpLoadingInterceptor, multi: true },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler }
   ],
   bootstrap: [AppComponent]
 })

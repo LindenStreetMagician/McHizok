@@ -20,9 +20,6 @@ export class ApplePieComponent implements OnDestroy {
         next: (applePieCoupon) => {
           this.downloadCoupon(applePieCoupon.fileName, this.convertBase64ToBlob(applePieCoupon.base64Content));
         },
-        error: (error) => {
-          console.log(error)
-        },
         complete: () => {
           this.blockCode = "";
         }
