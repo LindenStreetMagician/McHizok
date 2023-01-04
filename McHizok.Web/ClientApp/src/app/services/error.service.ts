@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorDetails } from '../models/error-details.model';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,7 @@ export class ErrorService {
         return error.message ? error.message : error.toString();
     }
 
-    getServerMessage(error: HttpErrorResponse): string {
-        return error.message;
+    getServerMessage(error: HttpErrorResponse): ErrorDetails {
+        return error.error;
     }
 }

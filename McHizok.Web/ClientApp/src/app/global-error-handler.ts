@@ -16,13 +16,12 @@ export class GlobalErrorHandler implements ErrorHandler {
         let message;
 
         if (error instanceof HttpErrorResponse) {
-            message = errorService.getServerMessage(error);
-            toastr.error(message);
+            message = errorService.getServerMessage(error).message;
         } else {
             message = errorService.getClientMessage(error);
-            toastr.error(message);
         }
 
+        toastr.error(message);
         console.error(error);
     }
 }
