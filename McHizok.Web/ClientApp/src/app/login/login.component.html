@@ -4,15 +4,18 @@
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card" style="border-radius: 1rem;" style="background-color: black;">
                     <div class="card-body p-5 text-center">
-                        <div class="form-outline mb-4">
-                            <input type="text" placeholder="Username" id="typeEmailX-2"
-                                class="form-control form-control-lg" />
-                        </div>
-                        <div class="form-outline mb-4">
-                            <input type="password" placeholder="Password" id="typePasswordX-2"
-                                class="form-control form-control-lg" />
-                        </div>
-                        <button class="btn btn-success btn-lg btn-block" type="submit">Login</button>
+                        <form #loginForm="ngForm" (ngSubmit)="login();" autocomplete="off">
+                            <div class="form-outline mb-4">
+                                <input name="username" [(ngModel)]="userForAuth.userName" type="text"
+                                    placeholder="Username" class="form-control form-control-lg" required />
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input name="password" [(ngModel)]="userForAuth.password" type="password"
+                                    placeholder="Password" class="form-control form-control-lg" required />
+                            </div>
+                            <button class="btn btn-success btn-lg btn-block" type="submit"
+                                [disabled]='!loginForm.form.valid'>Login</button>
+                        </form>
                     </div>
                 </div>
             </div>
