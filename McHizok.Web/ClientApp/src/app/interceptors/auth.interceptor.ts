@@ -27,7 +27,6 @@ export class AuthInterceptor implements HttpInterceptor {
                 if (error instanceof HttpErrorResponse && error.status === 401) {
                     this.authService.logout();
                     this.router.navigate(['login']);
-                    this.toastr.error('Lejárt munkamenet, kérlek jelentkezz be újra!');
                 }
                 throw error;
             })
