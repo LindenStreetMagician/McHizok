@@ -1,5 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { UserForAuth } from '../models/user-for-auth.model';
+import { ToastrService } from 'ngx-toastr';
+import { LoginRequest } from '../models/login-request.model';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +10,25 @@ import { UserForAuth } from '../models/user-for-auth.model';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  public userForAuth: UserForAuth = new UserForAuth();
+  public loginRequest = <LoginRequest>{};
+
+  constructor(public authService: AuthService, private toastr: ToastrService) { }
 
   login() {
-    console.log(this.userForAuth);
+    this.authService.login(this.loginRequest).subscribe({
+      next: (token) => { },
+      error: (err: HttpErrorResponse) => {
+        if (err.status == 401) {
+          this.toastr.error("Hibás felhasználó név vagy jelszó.");
+        }
+        else {
+          throw err;
+        }
+      }
+    })
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

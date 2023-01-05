@@ -4,8 +4,8 @@ import { ApplePieComponent } from './apple-pie/apple-pie.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'pies', component: ApplePieComponent },
+  { path: '', component: ApplePieComponent },
+  { path: 'login', component: LoginComponent },
   { path: '**', component: LoginComponent, pathMatch: 'full' }
 ];
 

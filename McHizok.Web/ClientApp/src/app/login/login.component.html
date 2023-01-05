@@ -6,11 +6,11 @@
                     <div class="card-body p-5 text-center">
                         <form #loginForm="ngForm" (ngSubmit)="login();" autocomplete="off">
                             <div class="form-outline mb-4">
-                                <input name="username" [(ngModel)]="userForAuth.userName" type="text"
+                                <input name="username" [(ngModel)]="loginRequest.userName" type="text"
                                     placeholder="Username" class="form-control form-control-lg" required />
                             </div>
                             <div class="form-outline mb-4">
-                                <input name="password" [(ngModel)]="userForAuth.password" type="password"
+                                <input name="password" [(ngModel)]="loginRequest.password" type="password"
                                     placeholder="Password" class="form-control form-control-lg" required />
                             </div>
                             <button class="btn btn-success btn-lg btn-block" type="submit"

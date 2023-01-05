@@ -8,12 +8,12 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ApplePieService {
-  baseUrl = environment.apiUrl;
+  private _baseUrl: string = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
   getApplePie(blockCode: string): Observable<Coupon> {
-    return this.http.get<Coupon>(this.baseUrl + 'api/applepies/dummy',
+    return this.http.get<Coupon>(this._baseUrl + 'api/applepies',
       {
         params: new HttpParams().set('blockCode', blockCode)
       });
