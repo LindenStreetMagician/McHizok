@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject, tap } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginRequest } from '../models/login-request.model';
 import { LoginResult } from '../models/login-result.model';
@@ -21,7 +21,7 @@ export class AuthService {
       tap(
         (loginResult: LoginResult) => {
           if (!!loginResult.token) {
-            localStorage.setItem(this.tokenKey, JSON.stringify(loginResult.token))
+            localStorage.setItem(this.tokenKey, loginResult.token);
             this.setAuthStatus(true);
           }
         }

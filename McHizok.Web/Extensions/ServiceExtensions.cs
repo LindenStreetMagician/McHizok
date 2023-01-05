@@ -57,6 +57,7 @@ public static class ServiceExtensions
                 ValidateIssuer = true,
                 ValidateAudience = true,
                 ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero,
                 ValidateIssuerSigningKey = true,
 
                 ValidIssuer = jwtSettings["validIssuer"],
