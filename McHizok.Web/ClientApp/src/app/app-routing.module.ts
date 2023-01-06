@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApplePieComponent } from './apple-pie/apple-pie.component';
+import { ApplePieComponent } from './components/apple-pie/apple-pie.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: '', component: ApplePieComponent, canActivate: [AuthGuard] },

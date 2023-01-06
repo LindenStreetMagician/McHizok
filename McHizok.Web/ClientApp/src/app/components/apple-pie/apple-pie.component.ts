@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { Buffer } from 'buffer';
-import { ApplePieService } from '../services/apple-pie.service';
+import { ApplePieService } from '../../services/apple-pie.service';
 
 @Component({
   selector: 'app-apple-pie',

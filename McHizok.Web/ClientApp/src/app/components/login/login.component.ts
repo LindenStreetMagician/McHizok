@@ -2,8 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { LoginRequest } from '../models/login-request.model';
-import { AuthService } from '../services/auth.service';
+import { LoginRequest } from '../../models/login-request.model';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
