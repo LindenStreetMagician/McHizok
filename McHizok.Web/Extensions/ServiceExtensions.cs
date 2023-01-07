@@ -16,7 +16,7 @@ public static class ServiceExtensions
     {
         services.AddScoped<IApplePieService, ApplePieService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
-        services.AddScoped<IAccountService, AccountService>();
+        services.AddScoped<IUserService, UserService>();
     }
 
     public static void ConfigureSqlContext(this IServiceCollection services) =>

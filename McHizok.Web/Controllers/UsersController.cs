@@ -5,15 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace McHizok.Web.Controllers;
 
-[Route("/api/accounts")]
+[Route("/api/users")]
 [ApiController]
-public class AccountsController : ControllerBase
+public class UsersController : ControllerBase
 {
-    private readonly IAccountService _accountService;
+    private readonly IUserService _userService;
 
-    public AccountsController(IAccountService accountService)
+    public UsersController(IUserService userService)
     {
-        _accountService = accountService;
+        _userService = userService;
     }
 
     [HttpGet("generate")]
@@ -39,7 +39,7 @@ public class AccountsController : ControllerBase
         if (!ModelState.IsValid)
             return UnprocessableEntity(ModelState);
 
-        var result = await _accountService.RegisterUser(userForRegistration);
+        var result = await _userService.RegisterUser(userForRegistration);
 
         if (!result.Succeeded)
         {

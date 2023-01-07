@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Identity;
 
 namespace McHizok.Services;
 
-public class AccountService : IAccountService
+public class UserService : IUserService
 {
     private readonly UserManager<User> _userManager;
 
-    public AccountService(UserManager<User> userManager)
+    public UserService(UserManager<User> userManager)
 	{
         _userManager = userManager;
     }
