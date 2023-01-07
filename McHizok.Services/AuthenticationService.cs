@@ -32,21 +32,6 @@ public class AuthenticationService : IAuthenticationService
         return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
     }
 
-    public async Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistration)
-    {
-        var user = new User
-        {
-            UserName = userForRegistration.UserName
-        };
-
-        var result = await _userManager.CreateAsync(user, userForRegistration.Password);
-
-        if (result.Succeeded)
-            await _userManager.AddToRolesAsync(user, userForRegistration.Roles);
-
-        return result;
-    }
-
     public async Task<bool> ValidateUser(UserForAuthenticationDto userForAuthentication)
     {
         _user = await _userManager.FindByNameAsync(userForAuthentication.UserName);

@@ -15,29 +15,6 @@ public class AuthenticationController : ControllerBase
         _authenticationService = authenticationService;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
-    {
-        if (userForRegistration is null)
-            return BadRequest("userForRegistrationDto cannot be null.");
-
-        if (!ModelState.IsValid)
-            return UnprocessableEntity(ModelState);
-
-        var result = await _authenticationService.RegisterUser(userForRegistration);
-
-        if (!result.Succeeded)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.TryAddModelError(error.Code, error.Description);
-            }
-            return BadRequest(ModelState);
-        }
-
-        return StatusCode(201);
-    }
-
     [HttpPost("login")]
     public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto userForAuthentication)
     {
