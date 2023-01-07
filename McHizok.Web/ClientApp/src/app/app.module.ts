@@ -11,12 +11,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { GlobalErrorHandler } from './global-error-handler';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ApplePieComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     FormsModule,
