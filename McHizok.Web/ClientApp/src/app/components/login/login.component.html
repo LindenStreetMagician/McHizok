@@ -1,0 +1,25 @@
+<section class="vh-100">
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center min-vh-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card" style="border-radius: 1rem;" style="background-color: black;">
+                    <div class="card-body p-5 text-center">
+                        <form #loginForm="ngForm" (ngSubmit)="login();" autocomplete="off">
+                            <div class="form-outline mb-4">
+                                <input name="username" [(ngModel)]="loginRequest.userName" type="text"
+                                    placeholder="Username" class="form-control form-control-lg" required />
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input name="password" [(ngModel)]="loginRequest.password" type="password"
+                                    placeholder="Password" class="form-control form-control-lg" required />
+                            </div>
+                            <button class="btn btn-success btn-lg btn-block" type="submit"
+                                [disabled]='!loginForm.form.valid'>Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<ngx-spinner name="auth" type="ball-clip-rotate"></ngx-spinner>
