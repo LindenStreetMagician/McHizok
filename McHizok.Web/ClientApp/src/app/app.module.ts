@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { GenerateRegisterLinkComponent } from './components/generate-register-link/generate-register-link.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     ApplePieComponent,
     LoginComponent,
     RegisterComponent,
-    NavigationComponent
+    NavigationComponent,
+    GenerateRegisterLinkComponent
   ],
   imports: [
     FormsModule,
