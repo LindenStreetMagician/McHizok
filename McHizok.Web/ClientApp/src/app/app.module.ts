@@ -9,6 +9,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpLoadingInterceptor } from './interceptors/http-loading.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { GlobalErrorHandler } from './global-error-handler';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
@@ -31,6 +32,7 @@ import { GenerateRegisterLinkComponent } from './components/generate-register-li
       positionClass: 'toast-bottom-right'
     }),
     NgxSpinnerModule,
+    ClipboardModule,
     HttpClientModule,
     AppRoutingModule
   ],
