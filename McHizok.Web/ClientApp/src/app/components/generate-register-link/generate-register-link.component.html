@@ -1,5 +1,7 @@
 <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
-    <input class="form-control form-control-lg" style="width: 200px;" maxlength="14" type="text"
+    <input class="form-control form-control-lg" style="width: 200px;" maxlength="14" type="text" [(ngModel)]="to"
         placeholder="For who?"><br>
-    <button class="btn btn-success">Generate</button><br>
+    <button class="btn btn-success" (click)="onClickGenerate()">Generate</button><br>
+    <input class="form-control form-control-lg" style="width: 380px;cursor: pointer;" type="text" #tokenText
+        [(ngModel)]="registrationToken" readonly placeholder="Register Token" (click)="reCopyUrl(tokenText)"><br>
 </div>
