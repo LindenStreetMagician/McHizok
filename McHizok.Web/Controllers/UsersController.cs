@@ -18,9 +18,15 @@ public class UsersController : ControllerBase
 
     [HttpGet("generate")]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> CreateRegistrationLink()
+    public async Task<IActionResult> CreateRegistrationLink([FromQuery] string to)
     {
         return Ok("CreateRegLink");
+    }
+
+    [HttpGet("validate")]
+    public async Task<IActionResult> ValidateRegistrationLink()
+    {
+        return Ok();
     }
 
     [HttpGet]
@@ -53,9 +59,9 @@ public class UsersController : ControllerBase
         return StatusCode(201);
     }
 
-    [HttpDelete("{id:guid}")]
+    [HttpDelete()]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> DeleteUser(Guid id)
+    public async Task<IActionResult> DeleteUser([FromQuery] Guid id)
     {
         return NoContent();
     }

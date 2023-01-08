@@ -1,0 +1,215 @@
+{
+    "formUrl": "https://mcdonalds.hu/velemenyed",
+    "promoCodeInputXPath": "/html/body/div/div/div/section/div[2]/div/div[5]/input",
+    "sendPromoCodeButtonXPath": "/html/body/div/div/div/section/div[2]/div/div[5]/button",
+    "firstAnswerXPath": "/html/body/section[1]/div/form/div[15]/div[5]/div[1]/div[2]/span",
+    "submitButtonXPath": "/html/body/section[1]/div/form/div[49]/div[3]/button",
+    "codeInvalidBlockXPath": "/html/body/div/div/div/section/div[2]/div/div[3]/div",
+    "couponXPath": "/html/body/div[1]/div/div/section/div[3]/div[2]/div[2]/div[2]/div[1]/canvas",
+    "form": [
+        {
+            "questionText": "A legutóbbi látogatásod alapján összességében mennyire voltál elégedett?",
+            "isRandomAnswer": true,
+            "answers": [
+                {
+                    "name": "Nagyon elégedett",
+                    "xpath": "/html/body/section[1]/div/form/div[16]/div[5]/div[1]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                },
+                {
+                    "name": "Elégedett",
+                    "xpath": "/html/body/section[1]/div/form/div[16]/div[5]/div[2]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                }
+            ]
+        },
+        {
+            "questionText": "Mennyire voltál elégedett a tisztasággal?",
+            "isRandomAnswer": true,
+            "answers": [
+                {
+                    "name": "Nagyon elégedett",
+                    "xpath": "/html/body/section[1]/div/form/div[17]/div[5]/div[1]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                },
+                {
+                    "name": "Elégedett",
+                    "xpath": "/html/body/section[1]/div/form/div[17]/div[5]/div[1]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                },
+                {
+                    "name": "Semleges",
+                    "xpath": "/html/body/section[1]/div/form/div[17]/div[5]/div[1]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                }
+            ]
+        },
+        {
+            "questionText": "Kollégáinkat mennyire találtad barátságosnak?",
+            "isRandomAnswer": true,
+            "answers": [
+                {
+                    "xpath": "/html/body/section[1]/div/form/div[19]/div[5]/div[1]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                }
+            ]
+        },
+        {
+            "questionText": "Pontosan kaptad meg a rendelésedet?",
+            "isRandomAnswer": true,
+            "answers": [
+                {
+                    "name": "Igen",
+                    "xpath": "/html/body/section[1]/div/form/div[21]/div[5]/div[1]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                }
+            ]
+        },
+        {
+            "questionText": "Hogyan értékeled a várakozási időt?",
+            "isRandomAnswer": true,
+            "answers": [
+                {
+                    "name": "Nagyon elégedett",
+                    "xpath": "/html/body/section[1]/div/form/div[23]/div[5]/div[1]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                },
+                {
+                    "name": "Elégedett",
+                    "xpath": "/html/body/section[1]/div/form/div[23]/div[5]/div[2]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                }
+            ]
+        },
+        {
+            "questionText": "Hogyan értékeled az általad vásárolt termékek minőségét?",
+            "isRandomAnswer": true,
+            "answers": [
+                {
+                    "name": "Nagyon elégedett",
+                    "xpath": "/html/body/section[1]/div/form/div[25]/div[5]/div[1]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                },
+                {
+                    "name": "Elégedett",
+                    "xpath": "/html/body/section[1]/div/form/div[25]/div[5]/div[2]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                }
+            ]
+        },
+        {
+            "questionText": "Tapasztaltál bármilyen problémát a látogatásod alatt?",
+            "isRandomAnswer": true,
+            "answers": [
+                {
+                    "name": "Nem",
+                    "xpath": "/html/body/section[1]/div/form/div[30]/div[5]/div[2]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                }
+            ]
+        },
+        {
+            "questionText": "A mostani élményed alapján mennyire valószínű, hogy a következő 30 napban visszatérsz ebbe a McDonald's étterembe?",
+            "isRandomAnswer": true,
+            "answers": [
+                {
+                    "name": "Nagyon valószínű",
+                    "xpath": "/html/body/section[1]/div/form/div[32]/div[5]/div[1]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                },
+                {
+                    "name": "Valószínű",
+                    "xpath": "/html/body/section[1]/div/form/div[32]/div[5]/div[2]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                }
+            ]
+        },
+        {
+            "questionText": "A mostani élményed alapján mennyire valószínű, hogy ajánlani fogod ezt az éttermet egy barátnak vagy családtagnak?",
+            "isRandomAnswer": false,
+            "answers": [
+                {
+                    "name": "10: Mindenképpen ajánlanám",
+                    "xpath": "/html/body/section[1]/div/form/div[33]/div[5]/div[1]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                },
+                {
+                    "xpath": "/html/body/section[1]/div/form/div[36]/div[5]/div/input",
+                    "action": "text",
+                    "text": [
+                        "Nagyon fincsi, nagyon jó",
+                        "Mert nagyon finom és jó volt"
+                    ]
+                }
+            ]
+        },
+        {
+            "questionText": "Nemed?",
+            "isRandomAnswer": true,
+            "answers": [
+                {
+                    "xpath": "/html/body/section[1]/div/form/div[39]/div[5]/div[1]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                },
+                {
+                    "xpath": "/html/body/section[1]/div/form/div[39]/div[5]/div[2]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                }
+            ]
+        },
+        {
+            "questionText": "Életkorod?",
+            "isRandomAnswer": true,
+            "answers": [
+                {
+                    "xpath": "/html/body/section[1]/div/form/div[40]/div[5]/div[2]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                },
+                {
+                    "xpath": "/html/body/section[1]/div/form/div[40]/div[5]/div[3]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                }
+            ]
+        },
+        {
+            "questionText": "Milyen gyakran jársz McDonald's étterembe?",
+            "isRandomAnswer": true,
+            "answers": [
+                {
+                    "xpath": "/html/body/section[1]/div/form/div[41]/div[5]/div[2]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                },
+                {
+                    "xpath": "/html/body/section[1]/div/form/div[41]/div[5]/div[3]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                },
+                {
+                    "xpath": "/html/body/section[1]/div/form/div[41]/div[5]/div[4]/div[2]/span",
+                    "action": "click",
+                    "text": []
+                }
+            ]
+        }
+    ]
+}
