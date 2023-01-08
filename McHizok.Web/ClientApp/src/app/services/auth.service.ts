@@ -34,13 +34,28 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return this.getToken() !== null;
+    let token = this.getToken();
+
+    if (token == null) {
+      return false;
+    }
+
+    if (this.tokenExpired(token)) {
+      return false;
+    }
+
+    return true;
   }
 
   init() {
     if (this.isAuthenticated()) {
       this.setAuthStatus(true);
     }
+  }
+
+  private tokenExpired(token: string) {
+    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
   }
 
   private setAuthStatus(isAuthenticated: boolean): void {
