@@ -19,4 +19,11 @@ export class UserService {
       }
     );
   }
+
+  validateRegistrationToken(regToken: string): Observable<boolean> {
+    return this.http.get<boolean>(this._baseUrl + 'api/users/validate',
+      {
+        params: new HttpParams().set('token', regToken)
+      });
+  }
 }
