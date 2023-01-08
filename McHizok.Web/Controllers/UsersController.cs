@@ -26,9 +26,11 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("validate")]
-    public async Task<IActionResult> ValidateRegistrationLink()
+    public async Task<IActionResult> ValidateRegistrationLink([FromQuery] string token)
     {
-        return Ok();
+        var isTokenValid = await _userService.ValidateRegistrationToken(token);
+
+        return Ok(isTokenValid);
     }
 
     [HttpGet]
@@ -38,7 +40,7 @@ public class UsersController : ControllerBase
         return Ok("GetUsers");
     }
 
-    [HttpPost("/register")]
+    [HttpPost("register")]
     public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
     {
         if (userForRegistration is null)
@@ -61,7 +63,7 @@ public class UsersController : ControllerBase
         return StatusCode(201);
     }
 
-    [HttpDelete()]
+    [HttpDelete]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteUser([FromQuery] Guid id)
     {
