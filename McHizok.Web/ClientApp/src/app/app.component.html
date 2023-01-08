@@ -1,3 +1,4 @@
+<app-navigation *ngIf="authService.authenticated$ | async"></app-navigation>
 <div class="container">
     <router-outlet></router-outlet>
 </div>
