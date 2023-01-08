@@ -39,7 +39,7 @@ export class GenerateRegisterLinkComponent {
   }
 
   private copyUrlToClipboard(url: string) {
-    let copyResult = this.clipboard.copy(this.registrationUrl);
+    let copyResult = this.clipboard.copy(url);
 
     if (copyResult) {
       this.toastr.success('Link copied to clipboard', `${this.to} reg link`);
