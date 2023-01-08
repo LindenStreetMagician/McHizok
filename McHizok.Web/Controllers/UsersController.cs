@@ -20,7 +20,9 @@ public class UsersController : ControllerBase
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> CreateRegistrationLink([FromQuery] string to)
     {
-        return Ok("CreateRegLink");
+        var registrationToken = await _userService.GenerateRegistrationToken(to);
+
+        return Ok(registrationToken);
     }
 
     [HttpGet("validate")]
