@@ -3,6 +3,7 @@ using System;
 using McHizok.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace McHizok.Web.Migrations
 {
     [DbContext(typeof(McHizokDbContext))]
-    partial class McHizokDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230108074035_CreateRegistration")]
+    partial class CreateRegistration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
