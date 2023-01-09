@@ -1,6 +1,6 @@
 ﻿using McHizok.Entities.Exceptions;
 using McHizok.Entities.Extensions;
-using McHizok.Entities.Models;
+using McHizok.Entities.Models.InputForm;
 using McHizok.Services.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;

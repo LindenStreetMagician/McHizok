@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace McHizok.Entities.Models;
+namespace McHizok.Entities.Models.InputForm;
 
 public class Question
 {

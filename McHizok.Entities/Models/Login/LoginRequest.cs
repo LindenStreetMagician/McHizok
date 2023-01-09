@@ -1,16 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace McHizok.Entities.DataTransferObjects;
+namespace McHizok.Entities.Models.Login;
 
-public record UserForRegistrationDto
+public record LoginRequest
 {
     [Required(ErrorMessage = "A felhasználó név megadása kötelező")]
     public string? UserName { get; init; }
 
     [Required(ErrorMessage = "A jelszó megadása kötelező")]
     public string? Password { get; init; }
-
-    public string? RegisterToken { get; set; }
-
-    public ICollection<string>? Roles { get; init; }
 }

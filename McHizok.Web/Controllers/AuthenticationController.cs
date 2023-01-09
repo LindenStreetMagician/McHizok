@@ -1,4 +1,4 @@
-﻿using McHizok.Entities.DataTransferObjects;
+﻿using McHizok.Entities.Models.Login;
 using McHizok.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +16,7 @@ public class AuthenticationController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto userForAuthentication)
+    public async Task<IActionResult> Authenticate([FromBody] LoginRequest userForAuthentication)
     {
         if (userForAuthentication is null)
             return BadRequest("userForAuthentication cannot be null.");

@@ -1,5 +1,5 @@
-﻿using McHizok.Entities.DataTransferObjects;
-using McHizok.Entities.Models;
+﻿using McHizok.Entities.Models;
+using McHizok.Entities.Models.Register;
 using McHizok.Services.Interfaces;
 using McHizok.Web.Data;
 using Microsoft.AspNetCore.Identity;
@@ -52,14 +52,14 @@ public class UserService : IUserService
         return registration is not null;
     }
 
-    public async Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistration)
+    public async Task<IdentityResult> RegisterUser(RegisterRequest registerRequest)
     {
         var user = new User
         {
-            UserName = userForRegistration.UserName
+            UserName = registerRequest.UserName
         };
 
-        var result = await _userManager.CreateAsync(user, userForRegistration.Password);
+        var result = await _userManager.CreateAsync(user, registerRequest.Password);
 
         return result;
     }

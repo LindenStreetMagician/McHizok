@@ -1,10 +1,10 @@
-﻿using McHizok.Entities.DataTransferObjects;
+﻿using McHizok.Entities.Models.Login;
 using Microsoft.AspNetCore.Identity;
 
 namespace McHizok.Services.Interfaces;
 
 public interface IAuthenticationService
 {
-    Task<bool> ValidateUser(UserForAuthenticationDto userForAuthentication);
+    Task<bool> ValidateUser(LoginRequest userForAuthentication);
     Task<string> CreateToken();
 }

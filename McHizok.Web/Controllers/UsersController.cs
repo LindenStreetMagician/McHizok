@@ -1,4 +1,4 @@
-﻿using McHizok.Entities.DataTransferObjects;
+﻿using McHizok.Entities.Models.Register;
 using McHizok.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -41,7 +41,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
+    public async Task<IActionResult> RegisterUser([FromBody] RegisterRequest userForRegistration)
     {
         if (userForRegistration is null)
             return BadRequest("userForRegistrationDto cannot be null.");

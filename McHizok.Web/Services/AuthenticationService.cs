@@ -1,5 +1,5 @@
-﻿using McHizok.Entities.DataTransferObjects;
-using McHizok.Entities.Models;
+﻿using McHizok.Entities.Models;
+using McHizok.Entities.Models.Login;
 using McHizok.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -32,11 +32,11 @@ public class AuthenticationService : IAuthenticationService
         return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
     }
 
-    public async Task<bool> ValidateUser(UserForAuthenticationDto userForAuthentication)
+    public async Task<bool> ValidateUser(LoginRequest loginRequest)
     {
-        _user = await _userManager.FindByNameAsync(userForAuthentication.UserName);
+        _user = await _userManager.FindByNameAsync(loginRequest.UserName);
 
-        var isUserValid = (_user is not null && await _userManager.CheckPasswordAsync(_user, userForAuthentication.Password));
+        var isUserValid = (_user is not null && await _userManager.CheckPasswordAsync(_user, loginRequest.Password));
 
         if (!isUserValid)
         {
