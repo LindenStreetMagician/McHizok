@@ -18,9 +18,9 @@ public class UsersController : ControllerBase
 
     [HttpGet("generate")]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> CreateRegistrationLink([FromQuery] string to)
+    public async Task<IActionResult> CreateRegistrationLink([FromQuery(Name = "account_for")] string accountFor)
     {
-        var registrationToken = await _userService.GenerateRegistrationToken(to);
+        var registrationToken = await _userService.GenerateRegistrationToken(accountFor);
 
         return Ok(registrationToken);
     }
