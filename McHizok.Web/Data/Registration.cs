@@ -7,5 +7,6 @@ public class Registration
 {
     public Guid Id { get; set; }
     public string RegistrationToken { get; set; }
-    public string To { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public string AccountFor { get; set; }
 }

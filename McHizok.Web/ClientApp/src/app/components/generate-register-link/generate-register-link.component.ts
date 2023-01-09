@@ -9,18 +9,18 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./generate-register-link.component.css']
 })
 export class GenerateRegisterLinkComponent {
-  to: string = '';
+  accountFor: string = '';
   registrationToken: string = '';
   registrationUrl: string = '';
   constructor(private toastr: ToastrService, private userService: UserService, private clipboard: Clipboard) { }
 
   onClickGenerate() {
-    if (this.to == "") {
+    if (this.accountFor == "") {
       this.toastr.error('Missing for who!');
       return
     }
 
-    this.userService.generateRegistrationLink(this.to).subscribe({
+    this.userService.generateRegistrationLink(this.accountFor).subscribe({
       next: (regToken) => {
         this.registrationToken = regToken;
         this.registrationUrl = `${location.origin}/register/${this.registrationToken}`;
@@ -42,7 +42,7 @@ export class GenerateRegisterLinkComponent {
     let copyResult = this.clipboard.copy(url);
 
     if (copyResult) {
-      this.toastr.success('Link copied to clipboard', `${this.to} reg link`);
+      this.toastr.success('Link copied to clipboard', `${this.accountFor} reg link`);
     } else {
       this.toastr.error('Copy failed.');
     }

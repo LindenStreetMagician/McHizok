@@ -10,5 +10,7 @@ public record UserForRegistrationDto
     [Required(ErrorMessage = "A jelszó megadása kötelező")]
     public string? Password { get; init; }
 
+    public string? RegisterToken { get; set; }
+
     public ICollection<string>? Roles { get; init; }
 }

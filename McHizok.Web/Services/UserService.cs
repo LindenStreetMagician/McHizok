@@ -18,7 +18,7 @@ public class UserService : IUserService
         _mcHizokDbContext = mcHizokDbContext;
     }
 
-    public async Task<string> GenerateRegistrationToken(string to)
+    public async Task<string> GenerateRegistrationToken(string accountFor)
     {
         string registrationToken;
         bool tokenExists;
@@ -35,7 +35,7 @@ public class UserService : IUserService
         var newRegistration = new Registration
         {
             RegistrationToken = registrationToken,
-            To = to
+            AccountFor = accountFor
         };
 
         await _mcHizokDbContext.AddAsync(newRegistration);
