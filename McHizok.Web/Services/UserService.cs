@@ -1,4 +1,5 @@
-﻿using McHizok.Entities.Models;
+﻿using McHizok.Entities.DataTransferObjects;
+using McHizok.Entities.Models;
 using McHizok.Entities.Models.Register;
 using McHizok.Services.Interfaces;
 using McHizok.Web.Data;
@@ -71,5 +72,10 @@ public class UserService : IUserService
         }
 
         return result;
+    }
+
+    public async Task<IEnumerable<UserDto>> GetUsers()
+    {
+        return await _mcHizokDbContext.Users.Select(u => new UserDto(u.Id, u.UserName, u.AccountFor)).ToListAsync();
     }
 }

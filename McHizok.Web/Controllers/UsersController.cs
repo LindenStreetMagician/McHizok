@@ -37,7 +37,8 @@ public class UsersController : ControllerBase
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetUsers()
     {
-        return Ok("GetUsers");
+        var users = await _userService.GetUsers();
+        return Ok(users);
     }
 
     [HttpPost("register")]
