@@ -1,4 +1,5 @@
 ﻿using McHizok.Entities.DataTransferObjects;
+using McHizok.Entities.Exceptions;
 using McHizok.Entities.Models;
 using McHizok.Entities.Models.Register;
 using McHizok.Services.Interfaces;
@@ -77,5 +78,16 @@ public class UserService : IUserService
     public async Task<IEnumerable<UserDto>> GetUsers()
     {
         return await _mcHizokDbContext.Users.Select(u => new UserDto(u.Id, u.UserName, u.AccountFor)).ToListAsync();
+    }
+
+    public async Task DeleteUser(string userId)
+    {
+        var user = await _mcHizokDbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+        if (user is null)
+            throw new UserNotFoundException(userId);
+
+        _mcHizokDbContext.Users.Remove(user);
+        await _mcHizokDbContext.SaveChangesAsync();
     }
 }

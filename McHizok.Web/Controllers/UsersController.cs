@@ -38,6 +38,7 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> GetUsers()
     {
         var users = await _userService.GetUsers();
+
         return Ok(users);
     }
 
@@ -66,8 +67,9 @@ public class UsersController : ControllerBase
 
     [HttpDelete]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> DeleteUser([FromQuery] Guid id)
+    public async Task<IActionResult> DeleteUser([FromQuery] string userId)
     {
+        await _userService.DeleteUser(userId);
         return NoContent();
     }
 

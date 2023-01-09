@@ -10,4 +10,5 @@ public interface IUserService
     Task<string> GenerateRegistrationToken(string to);
     Task<bool> ValidateRegistrationToken(string token);
     Task<IEnumerable<UserDto>> GetUsers();
+    Task DeleteUser(string userId);
 }
