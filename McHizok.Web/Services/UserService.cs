@@ -54,12 +54,21 @@ public class UserService : IUserService
 
     public async Task<IdentityResult> RegisterUser(RegisterRequest registerRequest)
     {
+        var registration = _mcHizokDbContext.Registrations.First(x => x.RegistrationToken == registerRequest.RegistrationToken);
+
         var user = new User
         {
-            UserName = registerRequest.UserName
+            UserName = registerRequest.UserName,
+            AccountFor = registration.AccountFor
         };
 
         var result = await _userManager.CreateAsync(user, registerRequest.Password);
+
+        if (result.Succeeded)
+        {
+            _mcHizokDbContext.Remove(registration);
+            await _mcHizokDbContext.SaveChangesAsync();
+        }
 
         return result;
     }
