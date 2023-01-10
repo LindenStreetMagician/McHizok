@@ -70,6 +70,7 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> DeleteUser([FromQuery] string userId)
     {
         await _userService.DeleteUser(userId);
+
         return NoContent();
     }
 

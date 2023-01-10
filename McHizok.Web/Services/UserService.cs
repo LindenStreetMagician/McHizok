@@ -15,7 +15,7 @@ public class UserService : IUserService
     private readonly McHizokDbContext _mcHizokDbContext;
 
     public UserService(UserManager<User> userManager, McHizokDbContext mcHizokDbContext)
-	{
+    {
         _userManager = userManager;
         _mcHizokDbContext = mcHizokDbContext;
     }
@@ -45,7 +45,6 @@ public class UserService : IUserService
 
         return registrationToken;
     }
-
 
     public async Task<bool> ValidateRegistrationToken(string token)
     {
@@ -88,6 +87,7 @@ public class UserService : IUserService
             throw new UserNotFoundException(userId);
 
         _mcHizokDbContext.Users.Remove(user);
+
         await _mcHizokDbContext.SaveChangesAsync();
     }
 }

@@ -15,7 +15,11 @@ export class RegisterComponent {
   public registrationToken: string = '';
   public repeatPassword: string = '';
 
-  constructor(private toastr: ToastrService, private route: ActivatedRoute, private router: Router, private userService: UserService, private authService: AuthService) {
+  constructor(private toastr: ToastrService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private userService: UserService,
+    private authService: AuthService) {
     this.registerRequest.registrationToken = this.route.snapshot.params['regToken'];
   }
 
