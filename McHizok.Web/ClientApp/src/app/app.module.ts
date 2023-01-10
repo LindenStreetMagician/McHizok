@@ -15,6 +15,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { GenerateRegisterLinkComponent } from './components/generate-register-link/generate-register-link.component';
+import { UserManagementComponent } from './components/user-management/user-management.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { GenerateRegisterLinkComponent } from './components/generate-register-li
     LoginComponent,
     RegisterComponent,
     NavigationComponent,
-    GenerateRegisterLinkComponent
+    GenerateRegisterLinkComponent,
+    UserManagementComponent
   ],
   imports: [
     FormsModule,
