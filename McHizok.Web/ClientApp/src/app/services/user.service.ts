@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { RegisterRequest } from '../models/register-request.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,9 @@ export class UserService {
 
   registerUser(registerRequest: RegisterRequest) {
     return this.http.post(this._baseUrl + 'api/users/register', registerRequest);
+  }
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this._baseUrl + "api/users");
   }
 }
