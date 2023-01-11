@@ -18,8 +18,7 @@ export class UserService {
       {
         responseType: "text",
         params: new HttpParams().set('account_for', accountFor)
-      }
-    );
+      });
   }
 
   validateRegistrationToken(regToken: string): Observable<boolean> {
@@ -35,5 +34,11 @@ export class UserService {
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this._baseUrl + "api/users");
+  }
+
+  deleteUser(userId: string) {
+    return this.http.delete(this._baseUrl + `api/users`, {
+      params: new HttpParams().set('userId', userId)
+    });
   }
 }
