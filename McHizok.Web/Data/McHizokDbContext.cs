@@ -17,4 +17,6 @@ public class McHizokDbContext : IdentityDbContext<User>
 
         builder.ApplyConfiguration(new RoleConfiguration());
     }
+
+    public DbSet<Registration> Registrations { get; set; }
 }

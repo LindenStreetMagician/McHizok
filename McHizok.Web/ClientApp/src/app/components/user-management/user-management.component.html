@@ -1,0 +1,24 @@
+<div class="row d-flex justify-content-center">
+    <div class="col-md-10 mt-5">
+        <table class="table table-dark table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th>Account For</th>
+                    <th>Username</th>
+                    <th class="text-center">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of Users; let i = index">
+                    <th class="text-center">{{i+1}}</th>
+                    <td>{{user.accountFor}}</td>
+                    <td>{{user.userName}}</td>
+                    <td class="text-center"><button class="btn btn-danger" (click)="onClickDelete(user)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

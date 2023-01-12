@@ -1,6 +1,6 @@
 ﻿using McHizok.Entities.Exceptions;
 using McHizok.Entities.Extensions;
-using McHizok.Entities.Models;
+using McHizok.Entities.Models.InputForm;
 using McHizok.Services.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -79,11 +79,10 @@ public class ApplePieService : IApplePieService
 
     private Form ReadFormConfig()
     {
-        var dirPath = Assembly.GetExecutingAssembly().Location;
-        dirPath = Path.GetDirectoryName(dirPath);
-        var dir = Path.Join(dirPath, "\\Resources\\form.json");
-        var jsonString = File.ReadAllText(dir);
-        return JsonSerializer.Deserialize<Form>(jsonString)!;
+        var dirPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        var formJsonPath = Path.Join(dirPath, "Services\\Resources\\form.json");
+
+        return JsonSerializer.Deserialize<Form>(File.ReadAllText(formJsonPath))!;
     }
 
     private void EnsureBlockCodeIsValid(ChromeDriver webDriver, By invalidBlockXPath)
@@ -97,7 +96,6 @@ public class ApplePieService : IApplePieService
         }
         catch (NoSuchElementException)
         {
-            Console.WriteLine("minden fasza.");
         }
     }
 }

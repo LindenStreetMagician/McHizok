@@ -9,14 +9,23 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpLoadingInterceptor } from './interceptors/http-loading.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { GlobalErrorHandler } from './global-error-handler';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { RegisterComponent } from './components/register/register.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { GenerateRegisterLinkComponent } from './components/generate-register-link/generate-register-link.component';
+import { UserManagementComponent } from './components/user-management/user-management.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ApplePieComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    NavigationComponent,
+    GenerateRegisterLinkComponent,
+    UserManagementComponent
   ],
   imports: [
     FormsModule,
@@ -25,6 +34,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
       positionClass: 'toast-bottom-right'
     }),
     NgxSpinnerModule,
+    ClipboardModule,
     HttpClientModule,
     AppRoutingModule
   ],

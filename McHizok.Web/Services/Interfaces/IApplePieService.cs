@@ -1,4 +1,4 @@
-﻿using McHizok.Entities.Models;
+﻿using McHizok.Entities.Models.InputForm;
 
 namespace McHizok.Services.Interfaces
 {

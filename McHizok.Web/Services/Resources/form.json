@@ -159,22 +159,6 @@
             ]
         },
         {
-            "questionText": "Mennyire óvta meg egészségedet és közérzetedet ez a McDonald's étterem a látogatásod során?",
-            "isRandomAnswer": true,
-            "answers": [
-                {
-                    "xpath": "/html/body/section[1]/div/form/div[37]/div[5]/div[1]/div[2]/span",
-                    "action": "click",
-                    "text": []
-                },
-                {
-                    "xpath": "/html/body/section[1]/div/form/div[37]/div[5]/div[2]/div[2]/span",
-                    "action": "click",
-                    "text": []
-                }
-            ]
-        },
-        {
             "questionText": "Nemed?",
             "isRandomAnswer": true,
             "answers": [

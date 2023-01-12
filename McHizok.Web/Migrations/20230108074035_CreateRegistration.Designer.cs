@@ -3,6 +3,7 @@ using System;
 using McHizok.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace McHizok.Web.Migrations
 {
     [DbContext(typeof(McHizokDbContext))]
-    partial class McHizokDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230108074035_CreateRegistration")]
+    partial class CreateRegistration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,10 +28,6 @@ namespace McHizok.Web.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
-
-                    b.Property<string>("AccountFor")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -93,14 +91,11 @@ namespace McHizok.Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("AccountFor")
+                    b.Property<string>("RegistrationToken")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("RegistrationToken")
+                    b.Property<string>("To")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -138,7 +133,7 @@ namespace McHizok.Web.Migrations
                         new
                         {
                             Id = "b383ab2f-0295-4194-bba9-7a870bfdd331",
-                            ConcurrencyStamp = "a6dd8953-7979-4374-bbc1-0d3a0d9aae7d",
+                            ConcurrencyStamp = "b708b7eb-de52-48fd-8985-778e30dc998c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

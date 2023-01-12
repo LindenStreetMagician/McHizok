@@ -1,8 +1,7 @@
-﻿using McHizok.Entities.DataTransferObjects;
-using McHizok.Entities.Models;
+﻿using McHizok.Entities.Models;
+using McHizok.Entities.Models.Login;
 using McHizok.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -32,26 +31,11 @@ public class AuthenticationService : IAuthenticationService
         return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
     }
 
-    public async Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistration)
+    public async Task<bool> ValidateUser(LoginRequest loginRequest)
     {
-        var user = new User
-        {
-            UserName = userForRegistration.UserName
-        };
+        _user = await _userManager.FindByNameAsync(loginRequest.UserName);
 
-        var result = await _userManager.CreateAsync(user, userForRegistration.Password);
-
-        if (result.Succeeded)
-            await _userManager.AddToRolesAsync(user, userForRegistration.Roles);
-
-        return result;
-    }
-
-    public async Task<bool> ValidateUser(UserForAuthenticationDto userForAuthentication)
-    {
-        _user = await _userManager.FindByNameAsync(userForAuthentication.UserName);
-
-        var isUserValid = (_user is not null && await _userManager.CheckPasswordAsync(_user, userForAuthentication.Password));
+        var isUserValid = (_user is not null && await _userManager.CheckPasswordAsync(_user, loginRequest.Password));
 
         if (!isUserValid)
         {

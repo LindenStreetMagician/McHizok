@@ -16,6 +16,13 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  init() {
+    if (this.isAuthenticated()) {
+      this.setAuthStatus(true);
+    }
+  }
+
+
   login(loginRequest: LoginRequest) {
     return this.http.post(this._baseUrl + 'api/authentication/login', loginRequest).pipe(
       tap(
@@ -34,21 +41,48 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return this.getToken() !== null;
-  }
+    let token = this.getToken();
 
-  init() {
-    if (this.isAuthenticated()) {
-      this.setAuthStatus(true);
+    if (token == null) {
+      return false;
     }
+
+    if (this.tokenExpired(token)) {
+      return false;
+    }
+
+    return true;
   }
 
-  private setAuthStatus(isAuthenticated: boolean): void {
-    this._authStatus.next(isAuthenticated);
+  isInRole(role: string) {
+    let authenticated = this.isAuthenticated();
+
+    if (!authenticated) {
+      return false;
+    }
+
+    let token = this.getToken();
+
+    let isJwtInRole = this.getTokenDetails(token!)["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] == role;
+
+    return isJwtInRole;
   }
 
   logout() {
     localStorage.removeItem(this.tokenKey);
     this.setAuthStatus(false);
+  }
+
+  private getTokenDetails(token: string) {
+    return JSON.parse(atob(token!.split('.')[1]));
+  }
+
+  private tokenExpired(token: string) {
+    const expiry = this.getTokenDetails(token).exp;
+    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+  }
+
+  private setAuthStatus(isAuthenticated: boolean): void {
+    this._authStatus.next(isAuthenticated);
   }
 }
