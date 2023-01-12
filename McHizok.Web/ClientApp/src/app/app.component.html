@@ -1,4 +1,4 @@
-<app-navigation *ngIf="authService.authenticated$ | async"></app-navigation>
+<app-navigation *ngIf="(authService.authenticated$ | async) && authService.isInRole('Admin')"></app-navigation>
 <div class="container">
     <router-outlet></router-outlet>
 </div>
