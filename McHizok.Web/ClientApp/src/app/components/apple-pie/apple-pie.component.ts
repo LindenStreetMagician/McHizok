@@ -15,6 +15,10 @@ export class ApplePieComponent implements OnDestroy {
   constructor(private applePieService: ApplePieService) { }
 
   onClickGetApplePie() {
+    if (this.blockCode == "") {
+      return;
+    }
+
     this.applePieService.getApplePie(this.blockCode).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
       {
         next: (applePieCoupon) => {
