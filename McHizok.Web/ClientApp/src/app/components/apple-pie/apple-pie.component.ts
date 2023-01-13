@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { Buffer } from 'buffer';
 import { ApplePieService } from '../../services/apple-pie.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-apple-pie',
@@ -11,11 +12,22 @@ import { ApplePieService } from '../../services/apple-pie.service';
 export class ApplePieComponent implements OnDestroy {
   public blockCode: string = "";
   private ngUnsubscribe = new Subject;
+  private regex = /^[a-zA-Z0-9]{12}$/;
 
-  constructor(private applePieService: ApplePieService) { }
+  constructor(private applePieService: ApplePieService, private toastr: ToastrService) { }
 
   onClickGetApplePie() {
     if (this.blockCode == "") {
+      this.toastr.error("The code field is empty.");
+      return;
+    }
+
+    let hyphenFreeBlockCode = this.blockCode.replaceAll('-', '');
+
+    let isCodeValid = this.regex.test(hyphenFreeBlockCode);
+
+    if (!isCodeValid) {
+      this.toastr.error("Invalid code format.");
       return;
     }
 
