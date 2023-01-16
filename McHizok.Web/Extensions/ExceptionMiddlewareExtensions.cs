@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Diagnostics;
 
 namespace McHizok.Web.Extensions;
 
-//TODO: Add logging
 public static class ExceptionMiddlewareExtensions
 {
     public static void ConfigureExceptionHandler(this WebApplication app)

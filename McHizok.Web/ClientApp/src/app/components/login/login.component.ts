@@ -22,7 +22,7 @@ export class LoginComponent {
       },
       error: (err: HttpErrorResponse) => {
         if (err.status == 401) {
-          this.toastr.error("Hibás felhasználó név vagy jelszó.");
+          this.toastr.error("Invalid username or password.");
         }
         else {
           throw err;
