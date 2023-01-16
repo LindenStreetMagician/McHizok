@@ -7,6 +7,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System.Reflection;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace McHizok.Services;
 
@@ -14,6 +15,8 @@ public class ApplePieService : IApplePieService
 {
     public async Task<Coupon> GetApplePieCoupon(string blockCode)
     {
+        IsBlockCodeFormatValid(blockCode);
+
         var form = ReadFormConfig();
 
         var chromeOptions = new ChromeOptions();
@@ -97,5 +100,19 @@ public class ApplePieService : IApplePieService
         catch (NoSuchElementException)
         {
         }
+    }
+
+    private void IsBlockCodeFormatValid(string blockCode)
+    {
+        var validBlockCodeLength = 12;
+
+        var validBlockCodeFormat = new Regex("/^[a-zA-Z0-9]{12}$/");
+
+        if (blockCode.Length != validBlockCodeLength)
+            throw new BlockCodeInvalidBadRequestException($"The block code length must be {validBlockCodeLength} long.");
+
+        if (!validBlockCodeFormat.IsMatch(blockCode))
+            throw new BlockCodeInvalidBadRequestException($"The block code must be consist of letters, numbers and hyphens");
+
     }
 }
