@@ -14,7 +14,6 @@ public class ApplePieController : ControllerBase
         _applePieService = applePieService;
     }
 
-    //TODO: Add block code format validation
     [HttpGet]
     public async Task<IActionResult> GetCoupon([FromQuery] string blockCode)
     {
