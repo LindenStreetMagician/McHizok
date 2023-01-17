@@ -1,6 +1,6 @@
-﻿using McHizok.Entities.Models;
-using McHizok.Entities.Models.Login;
+﻿using McHizok.Entities.Models.Login;
 using McHizok.Services.Interfaces;
+using McHizok.Web.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
