@@ -39,7 +39,7 @@ public class UserService : IUserService
             AccountFor = accountFor
         };
 
-        await _mcHizokDbContext.AddAsync(newRegistration);
+        await _mcHizokDbContext.Registrations.AddAsync(newRegistration);
         await _mcHizokDbContext.SaveChangesAsync();
 
         return registrationToken;
@@ -66,7 +66,7 @@ public class UserService : IUserService
 
         if (result.Succeeded)
         {
-            _mcHizokDbContext.Remove(registration);
+            _mcHizokDbContext.Registrations.Remove(registration);
             await _mcHizokDbContext.SaveChangesAsync();
         }
 

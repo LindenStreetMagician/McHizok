@@ -20,13 +20,27 @@ public class CouponInventoryService : ICouponInventoryService
     {
         return await _mcHizokDbContext.CouponInventories
                                       .Where(x => x.User.Id == userId)
-                                      .Select(c => new CouponDto(c.Id, c.CouponBase64, c.ExpiresAt, c.CouponCode))
+                                      .Select(c => new CouponDto(c.Id, c.CouponBase64, c.FileName, c.ExpiresAt, c.CouponCode))
                                       .ToListAsync();
     }
 
-    public Task SaveCoupon(string userId, Coupon coupon)
+    public async Task SaveCoupon(string userId, CouponDto coupon)
     {
-        throw new NotImplementedException();
+        var user = await _mcHizokDbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+        if (user is null)
+            throw new UserNotFoundException(userId);
+
+        var newCouponIventoryEntry = new CouponInventory
+        {
+            CouponBase64 = coupon.Base64Content,
+            CouponCode = coupon.CouponCode,
+            FileName = coupon.FileName,
+            User = user
+        };
+
+        await _mcHizokDbContext.CouponInventories.AddAsync(newCouponIventoryEntry);
+        await _mcHizokDbContext.SaveChangesAsync();
     }
 
     public async Task DeleteCoupon(Guid couponId)
