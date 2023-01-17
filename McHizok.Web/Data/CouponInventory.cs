@@ -11,5 +11,6 @@ public class CouponInventory
     public string CouponCode { get; set; }
     public DateTime ExpiresAt { get; set; } = DateTime.Now.AddDays(7);
 
+    public string UserId { get; set; }
     public User User { get; set; }
 }
