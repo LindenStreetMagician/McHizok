@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { Subject, takeUntil } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
@@ -8,13 +9,14 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.css']
 })
-export class UserManagementComponent implements OnInit {
+export class UserManagementComponent implements OnInit, OnDestroy {
   Users: User[] = [];
+  private ngUnsubscribe = new Subject;
 
   constructor(private userService: UserService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe({
+    this.userService.getUsers().pipe(takeUntil(this.ngUnsubscribe)).subscribe({
       next: (users) => {
         this.Users = users;
       }
@@ -23,7 +25,7 @@ export class UserManagementComponent implements OnInit {
 
   onClickDelete(user: User) {
     if (window.confirm(`Delete ${user.userName}? (made for: ${user.accountFor})`)) {
-      this.userService.deleteUser(user.userId).subscribe({
+      this.userService.deleteUser(user.userId).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
         next: () => {
           let index = this.Users.indexOf(user);
           this.Users.splice(index, 1);
@@ -32,5 +34,10 @@ export class UserManagementComponent implements OnInit {
         }
       });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next(null);
+    this.ngUnsubscribe.complete();
   }
 }
