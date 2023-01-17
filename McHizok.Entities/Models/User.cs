@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace McHizok.Entities.Models;
+namespace McHizok.Web.Data;
 
 public class User : IdentityUser
 {
