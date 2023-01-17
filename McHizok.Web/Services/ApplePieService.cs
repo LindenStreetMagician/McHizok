@@ -106,13 +106,13 @@ public class ApplePieService : IApplePieService
     {
         var validBlockCodeLength = 12;
 
-        var validBlockCodeFormat = new Regex("/^[a-zA-Z0-9]{12}$/");
-
         if (blockCode.Length != validBlockCodeLength)
             throw new BlockCodeInvalidBadRequestException($"The block code length must be {validBlockCodeLength} long.");
 
+        var validBlockCodeFormat = new Regex("^[a-zA-Z0-9]{12}$");
+
         if (!validBlockCodeFormat.IsMatch(blockCode))
-            throw new BlockCodeInvalidBadRequestException($"The block code must be consist of letters, numbers and hyphens");
+            throw new BlockCodeInvalidBadRequestException($"The block code must be consist of letters and numbers");
 
     }
 }

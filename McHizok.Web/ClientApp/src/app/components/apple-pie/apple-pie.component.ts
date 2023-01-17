@@ -31,7 +31,7 @@ export class ApplePieComponent implements OnDestroy {
       return;
     }
 
-    this.applePieService.getApplePie(this.blockCode).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
+    this.applePieService.getApplePie(hyphenFreeBlockCode).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
       {
         next: (applePieCoupon) => {
           this.downloadCoupon(applePieCoupon.fileName, this.convertBase64ToBlob(applePieCoupon.base64Content));
