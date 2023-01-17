@@ -1,4 +1,5 @@
-﻿using McHizok.Entities.Models.Login;
+﻿using McHizok.Entities.ErrorModel;
+using McHizok.Entities.Models.Login;
 using McHizok.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,7 +26,7 @@ public class AuthenticationController : ControllerBase
             return UnprocessableEntity(ModelState);
 
         if (!await _authenticationService.ValidateUser(userForAuthentication))
-            return Unauthorized();
+            return Unauthorized(new ErrorDetails { Message = "Invalid username or password.", StatusCode = 401 });
 
         return Ok(new { Token = await _authenticationService.CreateToken() });
     }

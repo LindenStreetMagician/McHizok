@@ -13,13 +13,14 @@ public class AuthenticationService : IAuthenticationService
 {
     private readonly UserManager<User> _userManager;
     private readonly IConfiguration _configuration;
-
+    private readonly ILogger<AuthenticationService> _logger;
     private User? _user;
 
-    public AuthenticationService(UserManager<User> userManager, IConfiguration configuration)
+    public AuthenticationService(UserManager<User> userManager, IConfiguration configuration, ILogger<AuthenticationService> logger)
     {
         _userManager = userManager;
         _configuration = configuration;
+        _logger = logger;
     }
 
     public async Task<string> CreateToken()
@@ -39,7 +40,7 @@ public class AuthenticationService : IAuthenticationService
 
         if (!isUserValid)
         {
-            //TODO: log failed login
+            _logger.LogWarning($"Invalid credentials were provided. Username: {loginRequest.UserName}");
         }
 
         return isUserValid;
