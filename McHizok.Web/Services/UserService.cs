@@ -56,6 +56,9 @@ public class UserService : IUserService
     {
         var registration = _mcHizokDbContext.Registrations.First(x => x.RegistrationToken == registerRequest.RegistrationToken);
 
+        if (registration is null)
+            throw new RegistrationTokenNotProvidedBadRequestException();
+
         var user = new User
         {
             UserName = registerRequest.UserName,
