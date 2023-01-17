@@ -1,6 +1,5 @@
 ﻿using McHizok.Entities.DataTransferObjects;
 using McHizok.Entities.Exceptions;
-using McHizok.Entities.Models.InputForm;
 using McHizok.Web.Data;
 using McHizok.Web.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -20,22 +19,22 @@ public class CouponInventoryService : ICouponInventoryService
     {
         return await _mcHizokDbContext.CouponInventories
                                       .Where(x => x.User.Id == userId)
-                                      .Select(c => new CouponDto(c.Id, c.CouponBase64, c.FileName, c.ExpiresAt, c.CouponCode))
+                                      .Select(c => new CouponDto(c.Id, c.CouponBase64, c.FileName, c.ExpiresAt, c.CouponCode, c.User.Id))
                                       .ToListAsync();
     }
 
-    public async Task SaveCoupon(string userId, CouponDto coupon)
+    public async Task SaveCoupon(CouponDto couponForInventory)
     {
-        var user = await _mcHizokDbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+        var user = await _mcHizokDbContext.Users.FirstOrDefaultAsync(u => u.Id == couponForInventory.UserId);
 
         if (user is null)
-            throw new UserNotFoundException(userId);
+            throw new UserNotFoundException(couponForInventory.UserId);
 
         var newCouponIventoryEntry = new CouponInventory
         {
-            CouponBase64 = coupon.Base64Content,
-            CouponCode = coupon.CouponCode,
-            FileName = coupon.FileName,
+            CouponBase64 = couponForInventory.Base64Content,
+            CouponCode = couponForInventory.CouponCode,
+            FileName = couponForInventory.FileName,
             User = user
         };
 
