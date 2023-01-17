@@ -25,6 +25,9 @@ public class Form
     [JsonPropertyName("couponXPath")]
     public string CouponXPath { get; set; }
 
+    [JsonPropertyName("couponCodeXPath")]
+    public string CouponCodeXPath { get; set; }
+
     [JsonPropertyName("form")]
     public List<Question> Questions { get; set; }
 }
