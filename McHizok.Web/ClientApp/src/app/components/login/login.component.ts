@@ -19,14 +19,6 @@ export class LoginComponent {
     this.authService.login(this.loginRequest).subscribe({
       next: () => {
         this.router.navigate(['/']);
-      },
-      error: (err: HttpErrorResponse) => {
-        if (err.status == 401) {
-          this.toastr.error("Invalid username or password.");
-        }
-        else {
-          throw err;
-        }
       }
     })
   }

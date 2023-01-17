@@ -40,7 +40,7 @@ public class AuthenticationService : IAuthenticationService
 
         if (!isUserValid)
         {
-            _logger.LogWarning($"Invalid credentials were provided. Username: ${loginRequest.UserName}");
+            _logger.LogWarning($"Invalid credentials were provided. Username: {loginRequest.UserName}");
         }
 
         return isUserValid;
