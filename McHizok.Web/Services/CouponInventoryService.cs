@@ -15,7 +15,7 @@ public class CouponInventoryService : ICouponInventoryService
         _mcHizokDbContext = mcHizokDbContext;
     }
 
-    public async Task<IEnumerable<CouponDto>> GetCoupons(string userId)
+    public async Task<IEnumerable<CouponDto>> GetCouponsAsync(string userId)
     {
         return await _mcHizokDbContext.CouponInventories
                                       .Where(x => x.User.Id == userId)
@@ -23,7 +23,7 @@ public class CouponInventoryService : ICouponInventoryService
                                       .ToListAsync();
     }
 
-    public async Task SaveCoupon(CouponDto couponForInventory)
+    public async Task SaveCouponAsync(CouponDto couponForInventory)
     {
         var user = await _mcHizokDbContext.Users.FirstOrDefaultAsync(u => u.Id == couponForInventory.UserId);
 
@@ -42,7 +42,7 @@ public class CouponInventoryService : ICouponInventoryService
         await _mcHizokDbContext.SaveChangesAsync();
     }
 
-    public async Task DeleteCoupon(Guid couponId)
+    public async Task DeleteCouponAsync(Guid couponId)
     {
         var coupon = await _mcHizokDbContext.CouponInventories.FirstOrDefaultAsync(u => u.Id == couponId);
 

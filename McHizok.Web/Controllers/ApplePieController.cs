@@ -24,7 +24,7 @@ public class ApplePieController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetCoupon([FromQuery] string blockCode)
     {
-        var coupon = await _applePieService.GetApplePieCoupon(blockCode);
+        var coupon = await _applePieService.GetApplePieCouponAsync(blockCode);
 
         return Ok(coupon);
     }
@@ -32,7 +32,7 @@ public class ApplePieController : ControllerBase
     [HttpGet("coupons")]
     public async Task<IActionResult> GetCouponsForUser([FromQuery] string Id)
     {
-        var coupons = await _couponInventoryService.GetCoupons(Id);
+        var coupons = await _couponInventoryService.GetCouponsAsync(Id);
 
         return Ok(coupons);
     }
@@ -43,7 +43,7 @@ public class ApplePieController : ControllerBase
         if (couponForIventory is null)
             BadRequest("CouponForIventory cannot be null.");
 
-        await _couponInventoryService.SaveCoupon(couponForIventory);
+        await _couponInventoryService.SaveCouponAsync(couponForIventory);
 
         return Ok();
     }
@@ -51,7 +51,7 @@ public class ApplePieController : ControllerBase
     [HttpDelete("coupons")]
     public async Task<IActionResult> DeleteCoupon([FromQuery] Guid Id)
     {
-        await _couponInventoryService.DeleteCoupon(Id);
+        await _couponInventoryService.DeleteCouponAsync(Id);
 
         return NoContent();
     }

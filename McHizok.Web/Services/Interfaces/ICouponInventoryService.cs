@@ -4,7 +4,7 @@ namespace McHizok.Web.Services.Interfaces;
 
 public interface ICouponInventoryService
 {
-    Task<IEnumerable<CouponDto>> GetCoupons(string userId);
-    Task SaveCoupon(CouponDto coupon);
-    Task DeleteCoupon(Guid couponId);
+    Task<IEnumerable<CouponDto>> GetCouponsAsync(string userId);
+    Task SaveCouponAsync(CouponDto coupon);
+    Task DeleteCouponAsync(Guid couponId);
 }

@@ -19,7 +19,7 @@ public class UserService : IUserService
         _mcHizokDbContext = mcHizokDbContext;
     }
 
-    public async Task<string> GenerateRegistrationToken(string accountFor)
+    public async Task<string> GenerateRegistrationTokenAsync(string accountFor)
     {
         string registrationToken;
         bool tokenExists;
@@ -45,14 +45,14 @@ public class UserService : IUserService
         return registrationToken;
     }
 
-    public async Task<bool> ValidateRegistrationToken(string token)
+    public async Task<bool> ValidateRegistrationTokenAsync(string token)
     {
         var registration = await _mcHizokDbContext.Registrations.FirstOrDefaultAsync(x => x.RegistrationToken == token);
 
         return registration is not null;
     }
 
-    public async Task<IdentityResult> RegisterUser(RegisterRequest registerRequest)
+    public async Task<IdentityResult> RegisterUserAsync(RegisterRequest registerRequest)
     {
         var registration = _mcHizokDbContext.Registrations.First(x => x.RegistrationToken == registerRequest.RegistrationToken);
 
@@ -76,12 +76,12 @@ public class UserService : IUserService
         return result;
     }
 
-    public async Task<IEnumerable<UserDto>> GetUsers()
+    public async Task<IEnumerable<UserDto>> GetUsersAsync()
     {
         return await _mcHizokDbContext.Users.Select(u => new UserDto(u.Id, u.UserName, u.AccountFor)).ToListAsync();
     }
 
-    public async Task DeleteUser(string userId)
+    public async Task DeleteUserAsync(string userId)
     {
         var user = await _mcHizokDbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
 

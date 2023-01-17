@@ -13,7 +13,7 @@ namespace McHizok.Services;
 
 public class ApplePieService : IApplePieService
 {
-    public async Task<Coupon> GetApplePieCoupon(string blockCode)
+    public async Task<Coupon> GetApplePieCouponAsync(string blockCode)
     {
         IsBlockCodeFormatValid(blockCode);
 

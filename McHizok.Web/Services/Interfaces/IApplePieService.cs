@@ -5,6 +5,6 @@ namespace McHizok.Services.Interfaces
 {
     public interface IApplePieService
     {
-        Task<Coupon> GetApplePieCoupon(string blockCode);
+        Task<Coupon> GetApplePieCouponAsync(string blockCode);
     }
 }

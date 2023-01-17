@@ -25,9 +25,9 @@ public class AuthenticationController : ControllerBase
         if (!ModelState.IsValid)
             return UnprocessableEntity(ModelState);
 
-        if (!await _authenticationService.ValidateUser(userForAuthentication))
+        if (!await _authenticationService.ValidateUserAsync(userForAuthentication))
             return Unauthorized(new ErrorDetails { Message = "Invalid username or password.", StatusCode = 401 });
 
-        return Ok(new { Token = await _authenticationService.CreateToken() });
+        return Ok(new { Token = await _authenticationService.CreateTokenAsync() });
     }
 }
