@@ -19,4 +19,6 @@ public class McHizokDbContext : IdentityDbContext<User>
     }
 
     public DbSet<Registration> Registrations { get; set; }
+
+    public DbSet<CouponInventory> CouponInventories { get; set; }
 }
