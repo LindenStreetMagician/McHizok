@@ -7,7 +7,7 @@ namespace McHizok.Services.Interfaces;
 public interface IUserService
 {
     Task<IdentityResult> RegisterUser(RegisterRequest userForRegistration);
-    Task<string> GenerateRegistrationToken(string to);
+    Task<string> GenerateRegistrationToken(string accountFor);
     Task<bool> ValidateRegistrationToken(string token);
     Task<IEnumerable<UserDto>> GetUsers();
     Task DeleteUser(string userId);
