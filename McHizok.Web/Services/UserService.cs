@@ -1,6 +1,5 @@
 ﻿using McHizok.Entities.DataTransferObjects;
 using McHizok.Entities.Exceptions;
-using McHizok.Entities.Models;
 using McHizok.Entities.Models.Register;
 using McHizok.Services.Interfaces;
 using McHizok.Web.Data;
