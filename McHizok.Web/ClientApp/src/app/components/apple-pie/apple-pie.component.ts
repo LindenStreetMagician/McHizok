@@ -19,6 +19,13 @@ export class ApplePieComponent implements OnDestroy {
 
   constructor(private applePieService: ApplePieService, private toastr: ToastrService) { }
 
+  onClickUsedCoupon() {
+    if (window.confirm(`Redeemed the coupon? If you click yes it will be lost.`)) {
+      this.couponSrc = "";
+      this.coupon = undefined;
+    }
+  }
+
   onClickGetApplePie() {
     if (this.blockCode == "") {
       this.toastr.error("The code field is empty.");
