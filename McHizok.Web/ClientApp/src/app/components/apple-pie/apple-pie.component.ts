@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ApplePieComponent implements OnDestroy {
   public blockCode: string = "";
+  public couponSrc = "";
   private ngUnsubscribe = new Subject;
   private regex = /^[a-zA-Z0-9]{12}$/;
 

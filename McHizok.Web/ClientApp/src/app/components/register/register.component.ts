@@ -26,6 +26,11 @@ export class RegisterComponent implements OnDestroy {
   }
 
   register() {
+    if (this.registerRequest.password.length < 10) {
+      this.toastr.error('The password length must be least 10 characters.');
+      return;
+    }
+
     if (this.registerRequest.password !== this.repeatPassword) {
       this.toastr.error('The given passwords do not match.');
       return;
