@@ -3,6 +3,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { Buffer } from 'buffer';
 import { ApplePieService } from '../../services/apple-pie.service';
 import { ToastrService } from 'ngx-toastr';
+import { Coupon } from 'src/app/models/coupon.model';
 
 @Component({
   selector: 'app-apple-pie',
@@ -11,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ApplePieComponent implements OnDestroy {
   public blockCode: string = "";
+  public coupon: Coupon | undefined = undefined;
   public couponSrc = "";
   private ngUnsubscribe = new Subject;
   private regex = /^[a-zA-Z0-9]{12}$/;
@@ -35,6 +37,8 @@ export class ApplePieComponent implements OnDestroy {
     this.applePieService.getApplePie(hyphenFreeBlockCode).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
       {
         next: (applePieCoupon) => {
+          this.couponSrc = "data:image/jpeg;base64," + applePieCoupon.base64Content;
+          this.coupon = applePieCoupon;
           this.downloadCoupon(applePieCoupon.fileName, this.convertBase64ToBlob(applePieCoupon.base64Content));
         },
         complete: () => {

@@ -1,16 +1,16 @@
 <div class="row justify-content-center align-items-center mt-5" style="height: 150px;">
-    <div class="col-md-10 d-flex justify-content-center">
+    <div class="col-md-10 d-flex justify-content-center" *ngIf="coupon">
         <img style="width: 100px; height: 100px;" src={{couponSrc}}>
     </div>
 </div>
 <div class="row justify-content-center align-items-center mb-5" style="height: 100px;">
-    <div class="col-md-10 d-flex justify-content-center">
+    <div class="col-md-10 d-flex justify-content-center" *ngIf="coupon">
         <button class="btn btn-info" style="width: 70px; margin-right: 5px;">💾</button>
         <button class="btn btn-info" style="width: 90px;">📄➡📁</button>
         <button class="btn btn-info" style="width: 70px; margin-left: 5px;">✔</button>
     </div>
 </div>
-<div class="row justify-content-center align-items-center mb-5">
+<div class="row justify-content-center align-items-center mb-5" *ngIf="!coupon">
     <div class="col-md-10 d-flex flex-column align-items-center">
         <input [(ngModel)]="blockCode" class="form-control form-control-lg" style="width: 200px;" maxlength="14"
             type="text"><br>
