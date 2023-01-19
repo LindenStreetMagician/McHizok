@@ -5,7 +5,7 @@
 </div>
 <div class="row justify-content-center align-items-center mb-5" style="height: 100px;">
     <div class="col-md-10 d-flex justify-content-center" *ngIf="coupon">
-        <button class="btn btn-info" style="width: 70px; margin-right: 5px;">💾</button>
+        <button class="btn btn-info" style="width: 70px; margin-right: 5px;" (click)="onClickDownloadCoupon()">💾</button>
         <button class="btn btn-info" style="width: 90px;">📄➡📁</button>
         <button class="btn btn-info" style="width: 70px; margin-left: 5px;" (click)="onClickUsedCoupon()">✔</button>
     </div>

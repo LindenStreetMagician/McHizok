@@ -19,8 +19,12 @@ export class ApplePieComponent implements OnDestroy {
 
   constructor(private applePieService: ApplePieService, private toastr: ToastrService) { }
 
+  onClickDownloadCoupon() {
+    this.downloadCoupon(this.coupon!.fileName, this.convertBase64ToBlob(this.coupon!.base64Content));
+  }
+
   onClickUsedCoupon() {
-    if (window.confirm(`Redeemed the coupon? If you click yes it will be lost.`)) {
+    if (window.confirm(`Redeemed the coupon? If you click OK it will be lost.`)) {
       this.couponSrc = "";
       this.coupon = undefined;
     }
@@ -46,7 +50,6 @@ export class ApplePieComponent implements OnDestroy {
         next: (applePieCoupon) => {
           this.couponSrc = "data:image/jpeg;base64," + applePieCoupon.base64Content;
           this.coupon = applePieCoupon;
-          this.downloadCoupon(applePieCoupon.fileName, this.convertBase64ToBlob(applePieCoupon.base64Content));
         },
         complete: () => {
           this.blockCode = "";
