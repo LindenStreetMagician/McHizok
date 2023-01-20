@@ -54,10 +54,18 @@ export class AuthService {
     return true;
   }
 
-  isInRole(role: string) {
-    let authenticated = this.isAuthenticated();
+  getLoggedInUserId() {
+    if (!this.isAuthenticated) {
+      return false;
+    }
 
-    if (!authenticated) {
+    let token = this.getToken();
+
+    return this.getTokenDetails(token!)["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
+  }
+
+  isInRole(role: string) {
+    if (!this.isAuthenticated) {
       return false;
     }
 
