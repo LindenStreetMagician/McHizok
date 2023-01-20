@@ -4,6 +4,8 @@ import { Buffer } from 'buffer';
 import { ApplePieService } from '../../services/apple-pie.service';
 import { ToastrService } from 'ngx-toastr';
 import { Coupon } from 'src/app/models/coupon.model';
+import { CouponInventoryService } from 'src/app/services/coupon-inventory.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-apple-pie',
@@ -17,7 +19,21 @@ export class ApplePieComponent implements OnDestroy {
   private ngUnsubscribe = new Subject;
   private regex = /^[a-zA-Z0-9]{12}$/;
 
-  constructor(private applePieService: ApplePieService, private toastr: ToastrService) { }
+  constructor(private applePieService: ApplePieService,
+    private authService: AuthService,
+    private couponInventoryService: CouponInventoryService,
+    private toastr: ToastrService) { }
+
+  onClickSaveCoupon() {
+    this.couponInventoryService.saveCouponForUser(this.authService.getLoggedInUserId(), this.coupon!)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: () => {
+          this.toastr.success("Coupon has been saved!");
+          this.resetCouponState();
+        }
+      });
+  }
 
   onClickDownloadCoupon() {
     this.downloadCoupon(this.coupon!.fileName, this.convertBase64ToBlob(this.coupon!.base64Content));
@@ -25,8 +41,7 @@ export class ApplePieComponent implements OnDestroy {
 
   onClickUsedCoupon() {
     if (window.confirm(`Redeemed the coupon? If you click OK it will be lost.`)) {
-      this.couponSrc = "";
-      this.coupon = undefined;
+      this.resetCouponState();
     }
   }
 
@@ -45,8 +60,9 @@ export class ApplePieComponent implements OnDestroy {
       return;
     }
 
-    this.applePieService.getApplePie(hyphenFreeBlockCode).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
-      {
+    this.applePieService.getApplePie(hyphenFreeBlockCode)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
         next: (applePieCoupon) => {
           this.couponSrc = "data:image/jpeg;base64," + applePieCoupon.base64Content;
           this.coupon = applePieCoupon;
@@ -76,6 +92,11 @@ export class ApplePieComponent implements OnDestroy {
     }
 
     return new Blob([new Uint8Array(byteNumbers)]);
+  }
+
+  private resetCouponState() {
+    this.coupon = undefined;
+    this.couponSrc = "";
   }
 
   ngOnDestroy(): void {
