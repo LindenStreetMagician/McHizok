@@ -1,10 +1,10 @@
-﻿using McHizok.Entities.Models.InputForm;
+﻿using McHizok.Entities.DataTransferObjects;
 
 namespace McHizok.Services.Interfaces
 
 {
     public interface IApplePieService
     {
-        Task<Coupon> GetApplePieCouponAsync(string blockCode);
+        Task<CouponDto> GetApplePieCouponAsync(string blockCode);
     }
 }
