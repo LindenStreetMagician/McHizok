@@ -18,7 +18,8 @@ public class CouponInventoryService : ICouponInventoryService
     public async Task<IEnumerable<CouponDto>> GetCouponsAsync(string userId)
     {
         return await _mcHizokDbContext.CouponInventories
-                                      .Where(x => x.User.Id == userId)
+                                      .Where(c => c.User.Id == userId)
+                                      .OrderBy(c => c.ExpiresAt)
                                       .Select(c => new CouponDto(c.Id, c.CouponBase64, c.FileName, c.ExpiresAt, c.CouponCode, c.User.Id))
                                       .ToListAsync();
     }
