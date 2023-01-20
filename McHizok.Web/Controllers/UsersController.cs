@@ -20,7 +20,7 @@ public class UsersController : ControllerBase
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> CreateRegistrationLink([FromQuery(Name = "account_for")] string accountFor)
     {
-        var registrationToken = await _userService.GenerateRegistrationToken(accountFor);
+        var registrationToken = await _userService.GenerateRegistrationTokenAsync(accountFor);
 
         return Ok(registrationToken);
     }
@@ -28,7 +28,7 @@ public class UsersController : ControllerBase
     [HttpGet("validate")]
     public async Task<IActionResult> ValidateRegistrationLink([FromQuery] string token)
     {
-        var isTokenValid = await _userService.ValidateRegistrationToken(token);
+        var isTokenValid = await _userService.ValidateRegistrationTokenAsync(token);
 
         return Ok(isTokenValid);
     }
@@ -37,7 +37,7 @@ public class UsersController : ControllerBase
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetUsers()
     {
-        var users = await _userService.GetUsers();
+        var users = await _userService.GetUsersAsync();
 
         return Ok(users);
     }
@@ -51,7 +51,7 @@ public class UsersController : ControllerBase
         if (!ModelState.IsValid)
             return UnprocessableEntity(ModelState);
 
-        var result = await _userService.RegisterUser(userForRegistration);
+        var result = await _userService.RegisterUserAsync(userForRegistration);
 
         if (!result.Succeeded)
         {
@@ -69,7 +69,7 @@ public class UsersController : ControllerBase
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteUser([FromQuery] string userId)
     {
-        await _userService.DeleteUser(userId);
+        await _userService.DeleteUserAsync(userId);
 
         return NoContent();
     }

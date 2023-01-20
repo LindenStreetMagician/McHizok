@@ -1,4 +1,5 @@
-﻿using McHizok.Entities.Exceptions;
+﻿using McHizok.Entities.DataTransferObjects;
+using McHizok.Entities.Exceptions;
 using McHizok.Entities.Extensions;
 using McHizok.Entities.Models.InputForm;
 using McHizok.Services.Interfaces;
@@ -13,7 +14,7 @@ namespace McHizok.Services;
 
 public class ApplePieService : IApplePieService
 {
-    public async Task<Coupon> GetApplePieCoupon(string blockCode)
+    public async Task<CouponDto> GetApplePieCouponAsync(string blockCode)
     {
         IsBlockCodeFormatValid(blockCode);
 
@@ -69,15 +70,17 @@ public class ApplePieService : IApplePieService
         webDriver.GetElementAndScrollTo(By.XPath(form.SubmitButtonXPath)).Click();
 
         var elementToScreen = wait.Until(webDriver => webDriver.GetElementAndScrollTo(By.XPath(form.CouponXPath)));
+        var couponCode = wait.Until(webDriver => webDriver.GetElementAndScrollTo(By.XPath(form.CouponCodeXPath))).Text;
+        var expiresAt = DateTime.Now.AddDays(7);
 
         var elementScreenshot = (elementToScreen as ITakesScreenshot)!.GetScreenshot();
-        var fileName = $"lejár {DateTime.Now.AddDays(7).ToString("MM-dd--HH--mm--ss")}.jpeg";
+        var fileName = $"{couponCode} expires {expiresAt:MM-dd}.jpeg";
 
         var base64CouponContent = elementScreenshot.AsBase64EncodedString;
 
         webDriver.Quit();
 
-        return new Coupon { Base64Content = base64CouponContent, FileName = fileName };
+        return new CouponDto(Guid.Empty, base64CouponContent, fileName, expiresAt, couponCode, string.Empty);
     }
 
     private Form ReadFormConfig()

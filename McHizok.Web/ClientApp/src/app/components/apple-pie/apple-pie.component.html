@@ -1,7 +1,27 @@
-<div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
-    <input [(ngModel)]="blockCode" class="form-control form-control-lg" style="width: 200px;" maxlength="14"
-        type="text"><br>
-    <button class="btn btn-success mt-3" style="width: 70px;" (click)="onClickGetApplePie()">🥧</button>
+<div class="row justify-content-center align-items-center mt-5" style="height: 150px;">
+    <div class="col-md-10 d-flex justify-content-center" *ngIf="coupon">
+        <img style="width: 100px; height: 100px;" src={{couponSrc}}>
+    </div>
+</div>
+<div class="row justify-content-center align-items-center mb-5" style="height: 100px;">
+    <div class="col-md-10 d-flex justify-content-center" *ngIf="coupon">
+        <button class="btn btn-info" style="width: 70px; margin-right: 5px;"
+            (click)="onClickDownloadCoupon()">💾</button>
+        <button class="btn btn-info" style="width: 90px;" (click)="onClickSaveCoupon()">📄➡📁</button>
+        <button class="btn btn-info" style="width: 70px; margin-left: 5px;" (click)="onClickUsedCoupon()">✔</button>
+    </div>
+</div>
+<div class="row justify-content-center align-items-center mb-5" *ngIf="!coupon">
+    <div class="col-md-10 d-flex flex-column align-items-center">
+        <input [(ngModel)]="blockCode" class="form-control form-control-lg" style="width: 200px;" maxlength="14"
+            type="text"><br>
+        <button class="btn btn-success" style="width: 70px;" (click)="onClickGetApplePie()">🥧</button>
+    </div>
+</div>
+<div class="row justify-content-center align-items-center" *ngIf="!coupon">
+    <div class="col-md-10 d-flex flex-column align-items-center">
+        <button class="btn btn-success" style="width: 200px;" routerLink="/coupons">📄📁</button>
+    </div>
 </div>
 <ngx-spinner name="pie" template="<img src='../../assets/applepie-loader.gif' />">
     <p style="color: white"> Pie is being made... </p>

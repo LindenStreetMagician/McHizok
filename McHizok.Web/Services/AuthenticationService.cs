@@ -1,6 +1,6 @@
-﻿using McHizok.Entities.Models;
-using McHizok.Entities.Models.Login;
+﻿using McHizok.Entities.Models.Login;
 using McHizok.Services.Interfaces;
+using McHizok.Web.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -23,16 +23,16 @@ public class AuthenticationService : IAuthenticationService
         _logger = logger;
     }
 
-    public async Task<string> CreateToken()
+    public async Task<string> CreateTokenAsync()
     {
         var signingCredentials = GetSigningCredentials();
-        var claims = await GetClaims();
+        var claims = await GetClaimsAsync();
         var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
 
         return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
     }
 
-    public async Task<bool> ValidateUser(LoginRequest loginRequest)
+    public async Task<bool> ValidateUserAsync(LoginRequest loginRequest)
     {
         _user = await _userManager.FindByNameAsync(loginRequest.UserName);
 
@@ -54,11 +54,12 @@ public class AuthenticationService : IAuthenticationService
         return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
     }
 
-    private async Task<List<Claim>> GetClaims()
+    private async Task<List<Claim>> GetClaimsAsync()
     {
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, _user.UserName)
+            new Claim(ClaimTypes.Name, _user.UserName),
+            new Claim(ClaimTypes.NameIdentifier, _user.Id)
         };
 
         var roles = await _userManager.GetRolesAsync(_user);

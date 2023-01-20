@@ -3,6 +3,7 @@ using System;
 using McHizok.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace McHizok.Web.Migrations
 {
     [DbContext(typeof(McHizokDbContext))]
-    partial class McHizokDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230117170603_AddCouponInventory")]
+    partial class AddCouponInventory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,10 +37,6 @@ namespace McHizok.Web.Migrations
 
                     b.Property<DateTime>("ExpiresAt")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -170,7 +168,7 @@ namespace McHizok.Web.Migrations
                         new
                         {
                             Id = "b383ab2f-0295-4194-bba9-7a870bfdd331",
-                            ConcurrencyStamp = "69933e0c-b1bb-435c-9835-d3c5d3092533",
+                            ConcurrencyStamp = "11e5295d-23f5-49d1-9018-9028b37901ae",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

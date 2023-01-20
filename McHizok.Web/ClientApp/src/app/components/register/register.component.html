@@ -1,28 +1,25 @@
-<section class="vh-100">
-    <div class="container">
-        <div class="row d-flex justify-content-center align-items-center min-vh-100">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div class="card" style="border-radius: 1rem;" style="background-color: black;">
-                    <div class="card-body p-5 text-center">
-                        <form #registerForm="ngForm" (ngSubmit)="register();" autocomplete="off">
-                            <div class="form-outline mb-4">
-                                <input name="username" [(ngModel)]="registerRequest.userName" type="text"
-                                    placeholder="Username" class="form-control form-control-lg" required />
-                            </div>
-                            <div class="form-outline mb-4">
-                                <input name="password" [(ngModel)]="registerRequest.password" type="password"
-                                    placeholder="Password" class="form-control form-control-lg" required />
-                            </div>
-                            <div class="form-outline mb-4">
-                                <input name="repeatPassword" [(ngModel)]="repeatPassword" type="password"
-                                    placeholder="Repeat Password" class="form-control form-control-lg" required />
-                            </div>
-                            <button class="btn btn-success btn-lg btn-block" type="submit"
-                                [disabled]='!registerForm.form.valid'>Register</button>
-                        </form>
+<div class="rov" style="height: 30vh;"></div>
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card" style="background-color: black;">
+            <div class="card-body px-5 text-center">
+                <form #registerForm="ngForm" (ngSubmit)="register();" autocomplete="off">
+                    <div class="mb-4">
+                        <input name="username" [(ngModel)]="registerRequest.userName" type="text" placeholder="Username"
+                            class="form-control form-control-lg" required />
                     </div>
-                </div>
+                    <div class="mb-4">
+                        <input name="password" [(ngModel)]="registerRequest.password" type="password"
+                            placeholder="Password" class="form-control form-control-lg" required />
+                    </div>
+                    <div class="mb-4">
+                        <input name="repeatPassword" [(ngModel)]="repeatPassword" type="password"
+                            placeholder="Repeat Password" class="form-control form-control-lg" required />
+                    </div>
+                    <button class="btn btn-success btn-lg btn-block" type="submit"
+                        [disabled]='!registerForm.form.valid'>Register</button>
+                </form>
             </div>
         </div>
     </div>
-</section>
+</div>

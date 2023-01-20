@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5 mt-3">
+        <button class="btn btn-info mb-2 float-end" style="width: 70px; margin-right: 10px;" routerLink="/">⬅</button>
+        <table class="table table-dark table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th style="width: 100px;">Coupon</th>
+                    <th>Expiry</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="userCoupons.length > 0">
+                <tr *ngFor="let coupon of userCoupons; let i = index">
+                    <td class="text-center align-middle">{{i+1}}</td>
+                    <td class="text-center align-middle" style="height:fit-content; cursor: pointer;"
+                        (click)="onClickShowCoupon(coupon)">
+                        <span *ngIf="coupon.showCoupon">
+                            <img [src]="'data:image/jpeg;base64,' + coupon.base64Content" [alt]="coupon.couponCode"
+                                height="100px" width="100px">
+                            <p class="mt-1">{{coupon.couponCode}}
+                            </p>
+                        </span>
+                        <span *ngIf="!coupon.showCoupon">
+                            👉📃
+                        </span>
+                    </td>
+                    <td class="text-center align-middle">{{coupon.expiresAt | date:'shortDate'}}</td>
+                    <td class="text-center align-middle">
+                        <button class="btn btn-info" style="width: 70px; margin-bottom: 15px;"
+                            (click)="onClickDownload(coupon)">💾</button><br>
+                        <button class="btn btn-danger" style="width: 70px;margin-top: 15px;"
+                            (click)="onClickDelete(coupon)">🗑</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="userCoupons.length == 0">
+                <tr>
+                    <td class="text-center align-middle">😭</td>
+                    <td class="text-center align-middle">😿</td>
+                    <td class="text-center align-middle">😢</td>
+                    <td class="text-center align-middle">🤧</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<ngx-spinner name="coupon" template="<img src='/../../assets/applepie-loader.gif' />">
+    <p style="color: white"> Getting your pies... </p>
+</ngx-spinner>

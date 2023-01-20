@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
+using McHizok.Web.Services.Interfaces;
+using McHizok.Web.Services;
 
 namespace McHizok.Web.Extensions;
 
@@ -17,6 +19,7 @@ public static class ServiceExtensions
         services.AddScoped<IApplePieService, ApplePieService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<ICouponInventoryService, CouponInventoryService>();
     }
 
     public static void ConfigureSqlContext(this IServiceCollection services) =>

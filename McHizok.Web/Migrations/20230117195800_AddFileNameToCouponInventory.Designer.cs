@@ -3,6 +3,7 @@ using System;
 using McHizok.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace McHizok.Web.Migrations
 {
     [DbContext(typeof(McHizokDbContext))]
-    partial class McHizokDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230117195800_AddFileNameToCouponInventory")]
+    partial class AddFileNameToCouponInventory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,7 +43,6 @@ namespace McHizok.Web.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
@@ -170,7 +171,7 @@ namespace McHizok.Web.Migrations
                         new
                         {
                             Id = "b383ab2f-0295-4194-bba9-7a870bfdd331",
-                            ConcurrencyStamp = "69933e0c-b1bb-435c-9835-d3c5d3092533",
+                            ConcurrencyStamp = "27a87720-0df5-4ba7-9286-3b1d1d7d1ac2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -282,9 +283,7 @@ namespace McHizok.Web.Migrations
                 {
                     b.HasOne("McHizok.Web.Data.User", "User")
                         .WithMany("Coupons")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });

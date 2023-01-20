@@ -1,17 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { UserService } from 'src/app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-generate-register-link',
   templateUrl: './generate-register-link.component.html',
   styleUrls: ['./generate-register-link.component.css']
 })
-export class GenerateRegisterLinkComponent {
+export class GenerateRegisterLinkComponent implements OnDestroy {
   accountFor: string = '';
   registrationToken: string = '';
   registrationUrl: string = '';
+  private ngUnsubscribe = new Subject;
+
   constructor(private toastr: ToastrService, private userService: UserService, private clipboard: Clipboard) { }
 
   onClickGenerate() {
@@ -20,7 +23,7 @@ export class GenerateRegisterLinkComponent {
       return
     }
 
-    this.userService.generateRegistrationLink(this.accountFor).subscribe({
+    this.userService.generateRegistrationLink(this.accountFor).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
       next: (regToken) => {
         this.registrationToken = regToken;
         this.registrationUrl = `${location.origin}/register/${this.registrationToken}`;
@@ -46,5 +49,10 @@ export class GenerateRegisterLinkComponent {
     } else {
       this.toastr.error('Copy failed.');
     }
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next(null);
+    this.ngUnsubscribe.complete();
   }
 }

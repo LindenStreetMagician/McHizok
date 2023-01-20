@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subject, takeUntil } from 'rxjs';
 import { RegisterRequest } from 'src/app/models/register-request.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
@@ -10,10 +11,11 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnDestroy {
   public registerRequest: RegisterRequest = <RegisterRequest>{};
   public registrationToken: string = '';
   public repeatPassword: string = '';
+  private ngUnsubscribe = new Subject;
 
   constructor(private toastr: ToastrService,
     private route: ActivatedRoute,
@@ -24,16 +26,26 @@ export class RegisterComponent {
   }
 
   register() {
+    if (this.registerRequest.password.length < 10) {
+      this.toastr.error('The password length must be least 10 characters.');
+      return;
+    }
+
     if (this.registerRequest.password !== this.repeatPassword) {
       this.toastr.error('The given passwords do not match.');
       return;
     }
 
-    this.userService.registerUser(this.registerRequest).subscribe({
+    this.userService.registerUser(this.registerRequest).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
       next: () => {
         this.authService.logout();
         this.router.navigate(['/login']);
       },
     })
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next(null);
+    this.ngUnsubscribe.complete();
   }
 }

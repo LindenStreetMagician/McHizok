@@ -16,6 +16,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { GenerateRegisterLinkComponent } from './components/generate-register-link/generate-register-link.component';
 import { UserManagementComponent } from './components/user-management/user-management.component';
+import { CouponInventoryComponent } from './components/coupon-inventory/coupon-inventory.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { UserManagementComponent } from './components/user-management/user-manag
     RegisterComponent,
     NavigationComponent,
     GenerateRegisterLinkComponent,
-    UserManagementComponent
+    UserManagementComponent,
+    CouponInventoryComponent
   ],
   imports: [
     FormsModule,
