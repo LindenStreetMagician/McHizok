@@ -18,7 +18,7 @@
                         <p class="mt-1">{{coupon.couponCode}}
                         </p>
                     </td>
-                    <td class="text-center align-middle">{{coupon.expiresAt}}</td>
+                    <td class="text-center align-middle">{{coupon.expiresAt | date:'shortDate'}}</td>
                     <td class="text-center align-middle">
                         <button class="btn btn-info" style="width: 70px; margin-bottom: 15px;"
                             (click)="onClickDownload(coupon)">💾</button><br>
