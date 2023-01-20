@@ -1,5 +1,4 @@
 ﻿using McHizok.Entities.DataTransferObjects;
-using McHizok.Entities.Models.InputForm;
 using McHizok.Services.Interfaces;
 using McHizok.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -30,7 +29,7 @@ public class ApplePieController : ControllerBase
     }
 
     [HttpGet("coupons")]
-    public async Task<IActionResult> GetCouponsForUser([FromQuery] string Id)
+    public async Task<IActionResult> GetCouponsForUser([FromQuery] string userId)
     {
         var coupons = await _couponInventoryService.GetCouponsAsync(Id);
 
@@ -49,9 +48,9 @@ public class ApplePieController : ControllerBase
     }
 
     [HttpDelete("coupons")]
-    public async Task<IActionResult> DeleteCoupon([FromQuery] Guid Id)
+    public async Task<IActionResult> DeleteCoupon([FromQuery] Guid couponId)
     {
-        await _couponInventoryService.DeleteCouponAsync(Id);
+        await _couponInventoryService.DeleteCouponAsync(couponId);
 
         return NoContent();
     }
