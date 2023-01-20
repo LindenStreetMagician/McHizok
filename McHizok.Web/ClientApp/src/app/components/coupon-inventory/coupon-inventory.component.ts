@@ -3,6 +3,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { Coupon } from 'src/app/models/coupon.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CouponInventoryService } from 'src/app/services/coupon-inventory.service';
+import { downloadCoupon } from 'src/app/utilities/coupon-download-util';
 
 @Component({
   selector: 'app-coupon-inventory',
@@ -37,7 +38,7 @@ export class CouponInventoryComponent implements OnInit {
   }
 
   onClickDownload(coupon: Coupon) {
-
+    downloadCoupon(coupon);
   }
 
   onRowClick(coupon: Coupon) {

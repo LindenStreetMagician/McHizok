@@ -1,11 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { Buffer } from 'buffer';
 import { ApplePieService } from '../../services/apple-pie.service';
 import { ToastrService } from 'ngx-toastr';
 import { Coupon } from 'src/app/models/coupon.model';
 import { CouponInventoryService } from 'src/app/services/coupon-inventory.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { downloadCoupon } from 'src/app/utilities/coupon-download-util';
 
 @Component({
   selector: 'app-apple-pie',
@@ -36,7 +36,7 @@ export class ApplePieComponent implements OnDestroy {
   }
 
   onClickDownloadCoupon() {
-    this.downloadCoupon(this.coupon!.fileName, this.convertBase64ToBlob(this.coupon!.base64Content));
+    downloadCoupon(this.coupon!);
   }
 
   onClickUsedCoupon() {
@@ -71,27 +71,6 @@ export class ApplePieComponent implements OnDestroy {
           this.blockCode = "";
         }
       });
-  }
-
-  private downloadCoupon(couponName: string, couponContent: Blob) {
-    const a = document.createElement('a');
-    const objectUrl = URL.createObjectURL(couponContent);
-    a.href = objectUrl;
-    a.download = couponName;
-    a.click();
-    URL.revokeObjectURL(objectUrl);
-  }
-
-  private convertBase64ToBlob(base64Coupon: string): Blob {
-    const byteCharacters = Buffer.from(base64Coupon, 'base64').toString('binary');
-
-    const byteNumbers = new Array(byteCharacters.length);
-
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-
-    return new Blob([new Uint8Array(byteNumbers)]);
   }
 
   private resetCouponState() {
