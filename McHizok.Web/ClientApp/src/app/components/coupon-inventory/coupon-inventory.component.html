@@ -9,15 +9,20 @@
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
-            <tbody>
             <tbody *ngIf="userCoupons.length > 0">
                 <tr *ngFor="let coupon of userCoupons; let i = index">
                     <td class="text-center align-middle">{{i+1}}</td>
-                    <td class="text-center align-middle" style="height:fit-content" (click)="onRowClick(coupon)"><img
-                            [src]="'data:image/jpeg;base64,' + coupon.base64Content" [alt]="coupon.couponCode"
-                            height="100px" width="100px">
-                        <p class="mt-1">{{coupon.couponCode}}
-                        </p>
+                    <td class="text-center align-middle" style="height:fit-content; cursor: pointer;"
+                        (click)="onClickShowCoupon(coupon)">
+                        <span *ngIf="coupon.showCoupon">
+                            <img [src]="'data:image/jpeg;base64,' + coupon.base64Content" [alt]="coupon.couponCode"
+                                height="100px" width="100px">
+                            <p class="mt-1">{{coupon.couponCode}}
+                            </p>
+                        </span>
+                        <span *ngIf="!coupon.showCoupon">
+                            👉📃
+                        </span>
                     </td>
                     <td class="text-center align-middle">{{coupon.expiresAt | date:'shortDate'}}</td>
                     <td class="text-center align-middle">

@@ -34,7 +34,7 @@ export class CouponInventoryComponent implements OnInit {
       return;
     }
 
-    if (window.confirm(`This coupon is still valid. Are you sure??`)) {
+    if (window.confirm(`This coupon is still valid. Are you sure?`)) {
       this.deleteCoupon(coupon);
     }
   }
@@ -43,7 +43,8 @@ export class CouponInventoryComponent implements OnInit {
     downloadCoupon(coupon);
   }
 
-  onRowClick(coupon: Coupon) {
+  onClickShowCoupon(coupon: Coupon) {
+    coupon.showCoupon = !coupon.showCoupon;
   }
 
   private isCouponExpired(expirationTime: Date): boolean {

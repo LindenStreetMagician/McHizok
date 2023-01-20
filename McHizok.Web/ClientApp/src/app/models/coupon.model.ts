@@ -5,4 +5,5 @@ export class Coupon {
     expiresAt: Date = new Date();
     couponCode: string = "";
     userId: string = "";
+    showCoupon: boolean = false;
 }
