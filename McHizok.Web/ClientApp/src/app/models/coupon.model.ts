@@ -1,5 +1,5 @@
 export class Coupon {
-    Id: string = "";
+    couponId: string = "";
     base64Content: string = "";
     fileName: string = "";
     expiresAt: Date = new Date();

@@ -37,6 +37,7 @@ export class ApplePieComponent implements OnDestroy {
 
   onClickDownloadCoupon() {
     downloadCoupon(this.coupon!);
+    this.resetCouponState();
   }
 
   onClickUsedCoupon() {

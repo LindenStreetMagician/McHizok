@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
 import { Coupon } from 'src/app/models/coupon.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,7 +16,7 @@ export class CouponInventoryComponent implements OnInit {
   private ngUnsubscribe = new Subject;
   userCoupons: Coupon[] = [];
 
-  constructor(private couponInventoryService: CouponInventoryService, private authService: AuthService) { }
+  constructor(private couponInventoryService: CouponInventoryService, private authService: AuthService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.couponInventoryService.getUserCoupons(this.authService.getLoggedInUserId())
@@ -23,18 +24,19 @@ export class CouponInventoryComponent implements OnInit {
       .subscribe({
         next: (coupons) => {
           this.userCoupons = coupons;
-          console.log(this.userCoupons);
         }
       });
   }
 
   onClickDelete(coupon: Coupon) {
     if (this.isCouponExpired(coupon.expiresAt)) {
-      console.log("expired");
+      this.deleteCoupon(coupon);
       return;
     }
 
-    console.log("mchizok")
+    if (window.confirm(`This coupon is still valid. Are you sure??`)) {
+      this.deleteCoupon(coupon);
+    }
   }
 
   onClickDownload(coupon: Coupon) {
@@ -42,7 +44,6 @@ export class CouponInventoryComponent implements OnInit {
   }
 
   onRowClick(coupon: Coupon) {
-    console.log(coupon);
   }
 
   private isCouponExpired(expirationTime: Date): boolean {
@@ -50,6 +51,20 @@ export class CouponInventoryComponent implements OnInit {
     const expiry = new Date(expirationTime).getTime();
 
     return expiry <= today;
+  }
+
+  private deleteCoupon(coupon: Coupon) {
+    console.log(coupon);
+    this.couponInventoryService.deleteCoupon(coupon)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: () => {
+          let index = this.userCoupons.indexOf(coupon);
+          this.userCoupons.splice(index, 1);
+
+          this.toastr.success('Coupon deleted.');
+        }
+      });
   }
 
   ngOnDestroy(): void {

@@ -25,10 +25,11 @@ export class CouponInventoryService {
     return this.http.post<Coupon>(this._baseUrl + 'api/applepies/coupons', coupon);
   }
 
-  deleteCoupon(couponId: string) {
+  deleteCoupon(coupon: Coupon) {
+    console.log(coupon);
     return this.http.delete(this._baseUrl + "api/applepies/coupons",
       {
-        params: new HttpParams().set('couponId', couponId)
+        params: new HttpParams().set('couponId', coupon.couponId)
       });
   }
 }
