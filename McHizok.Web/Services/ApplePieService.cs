@@ -80,14 +80,7 @@ public class ApplePieService : IApplePieService
 
         webDriver.Quit();
 
-        return new CouponDto
-        { 
-            Base64Content = base64CouponContent,
-            FileName = fileName,
-            CouponCode = couponCode,
-            ExpiresAt = expiresAt,
-            UserId = string.Empty
-        };
+        return new CouponDto(Guid.Empty, base64CouponContent, fileName, expiresAt, couponCode, string.Empty);
     }
 
     private Form ReadFormConfig()
