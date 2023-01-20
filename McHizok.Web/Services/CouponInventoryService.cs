@@ -35,6 +35,7 @@ public class CouponInventoryService : ICouponInventoryService
             CouponBase64 = couponForInventory.Base64Content,
             CouponCode = couponForInventory.CouponCode,
             FileName = couponForInventory.FileName,
+            ExpiresAt = couponForInventory.ExpiresAt,
             User = user
         };
 

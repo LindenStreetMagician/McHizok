@@ -9,7 +9,7 @@ public class CouponInventory
     public string FileName { get; set; }
     public string CouponBase64 { get; set; }
     public string CouponCode { get; set; }
-    public DateTime ExpiresAt { get; set; } = DateTime.Now.AddDays(7);
+    public DateTime ExpiresAt { get; set; }
 
     public string UserId { get; set; }
     public User User { get; set; }

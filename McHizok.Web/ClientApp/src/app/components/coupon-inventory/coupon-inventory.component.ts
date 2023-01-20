@@ -27,8 +27,13 @@ export class CouponInventoryComponent implements OnInit {
       });
   }
 
-  onClickDelete(couponId: string) {
+  onClickDelete(coupon: Coupon) {
+    if (this.isCouponExpired(coupon.expiresAt)) {
+      console.log("expired");
+      return;
+    }
 
+    console.log("mchizok")
   }
 
   onClickDownload(coupon: Coupon) {
@@ -37,6 +42,13 @@ export class CouponInventoryComponent implements OnInit {
 
   onRowClick(coupon: Coupon) {
     console.log(coupon);
+  }
+
+  private isCouponExpired(expirationTime: Date): boolean {
+    const today = new Date().getTime();
+    const expiry = new Date(expirationTime).getTime();
+
+    return expiry <= today;
   }
 
   ngOnDestroy(): void {
