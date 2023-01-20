@@ -10,6 +10,7 @@
                 </tr>
             </thead>
             <tbody>
+            <tbody *ngIf="userCoupons.length > 0">
                 <tr *ngFor="let coupon of userCoupons; let i = index">
                     <td class="text-center align-middle">{{i+1}}</td>
                     <td class="text-center align-middle" style="height:fit-content" (click)="onRowClick(coupon)"><img
@@ -25,6 +26,14 @@
                         <button class="btn btn-danger" style="width: 70px;margin-top: 15px;"
                             (click)="onClickDelete(coupon)">🗑</button>
                     </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="userCoupons.length == 0">
+                <tr>
+                    <td class="text-center align-middle">😭</td>
+                    <td class="text-center align-middle">😿</td>
+                    <td class="text-center align-middle">😢</td>
+                    <td class="text-center align-middle">🤧</td>
                 </tr>
             </tbody>
         </table>
