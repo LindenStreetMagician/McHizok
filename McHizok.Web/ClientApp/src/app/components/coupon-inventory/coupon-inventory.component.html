@@ -1,1 +1,32 @@
-<p>coupon-inventory works!</p>
+<div class="row d-flex justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5 mt-3">
+        <table class="table table-dark table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center">#</th>
+                    <th style="width: 100px;">Coupon</th>
+                    <th>Expiry</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let coupon of userCoupons; let i = index">
+                    <td class="text-center align-middle">{{i+1}}</td>
+                    <td class="text-center align-middle" style="height:fit-content" (click)="onRowClick(coupon)"><img
+                            [src]="'data:image/jpeg;base64,' + coupon.base64Content" [alt]="coupon.couponCode"
+                            height="100px" width="100px">
+                        <p class="mt-1">{{coupon.couponCode}}
+                        </p>
+                    </td>
+                    <td class="text-center align-middle">{{coupon.expiresAt}}</td>
+                    <td class="text-center align-middle">
+                        <button class="btn btn-info" style="width: 70px; margin-bottom: 15px;"
+                            (click)="onClickDownload(coupon)">💾</button><br>
+                        <button class="btn btn-danger" style="width: 70px;margin-top: 15px;"
+                            (click)="onClickDelete(coupon.Id)">🗑</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
