@@ -78,7 +78,13 @@ public class UserService : IUserService
 
     public async Task<IEnumerable<UserDto>> GetUsersAsync()
     {
-        return await _mcHizokDbContext.Users.Select(u => new UserDto(u.Id, u.UserName, u.AccountFor)).ToListAsync();
+        var adminUsers = await _userManager.GetUsersInRoleAsync("Admin");
+
+        return await _mcHizokDbContext.Users
+                                      .Where(u => !adminUsers.Contains(u))
+                                      .Select(u => new UserDto(u.Id, u.UserName, u.AccountFor))
+                                      .ToListAsync();
+
     }
 
     public async Task DeleteUserAsync(string userId)
