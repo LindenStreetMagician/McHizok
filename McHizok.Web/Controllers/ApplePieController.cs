@@ -31,7 +31,7 @@ public class ApplePieController : ControllerBase
     [HttpGet("coupons")]
     public async Task<IActionResult> GetCouponsForUser([FromQuery] string userId)
     {
-        var coupons = await _couponInventoryService.GetCouponsAsync(Id);
+        var coupons = await _couponInventoryService.GetCouponsAsync(userId);
 
         return Ok(coupons);
     }
