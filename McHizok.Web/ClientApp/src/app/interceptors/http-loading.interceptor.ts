@@ -21,13 +21,13 @@ export class HttpLoadingInterceptor implements HttpInterceptor {
     }
 
     private setSpinnerName(req: HttpRequest<any>) {
-        if (req.url.includes('applepies')) {
-            this.spinnerName = 'pie';
+        if (req.url.includes('coupon')) {
+            this.spinnerName = 'coupon';
             return;
         }
 
-        if (req.url.includes('coupon')) {
-            this.spinnerName = 'coupon';
+        if (req.url.includes('applepies')) {
+            this.spinnerName = 'pie';
             return;
         }
 

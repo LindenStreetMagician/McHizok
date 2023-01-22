@@ -69,3 +69,5 @@ typings/
 # System files
 .DS_Store
 Thumbs.db
+/McHizok.Web/Data/Configurations/AdminRoleAssignmentConfiguration.cs
+/McHizok.Web/Data/Configurations/AdminUserConfiguration.cs
