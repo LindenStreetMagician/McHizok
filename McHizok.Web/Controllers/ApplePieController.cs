@@ -3,7 +3,6 @@ using McHizok.Services.Interfaces;
 using McHizok.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace McHizok.Web.Controllers;
 
