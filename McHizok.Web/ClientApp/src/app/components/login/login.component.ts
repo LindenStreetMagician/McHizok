@@ -24,10 +24,6 @@ export class LoginComponent implements OnDestroy {
     })
   }
 
-  logout() {
-    this.authService.logout();
-  }
-
   ngOnDestroy(): void {
     this.ngUnsubscribe.next(null);
     this.ngUnsubscribe.complete();
