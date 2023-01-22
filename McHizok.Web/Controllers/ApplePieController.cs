@@ -13,17 +13,21 @@ public class ApplePieController : ControllerBase
 {
     private readonly IApplePieService _applePieService;
     private readonly ICouponInventoryService _couponInventoryService;
+    private readonly ILogger<ApplePieController> _logger;
 
-    public ApplePieController(IApplePieService applePieService, ICouponInventoryService couponInventoryService)
+    public ApplePieController(IApplePieService applePieService, ICouponInventoryService couponInventoryService, ILogger<ApplePieController> logger)
     {
         _applePieService = applePieService;
         _couponInventoryService = couponInventoryService;
+        _logger = logger;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetCoupon([FromQuery] string blockCode)
     {
         var coupon = await _applePieService.GetApplePieCouponAsync(blockCode);
+
+        _logger.LogInformation($"Coupon was created for {User.Identity.Name} with code: {blockCode}");
 
         return Ok(coupon);
     }
