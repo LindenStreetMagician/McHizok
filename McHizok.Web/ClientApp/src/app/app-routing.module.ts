@@ -10,6 +10,7 @@ import { RegisterGuard } from './guards/register.guard';
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { AdminGuard } from './guards/admin.guard';
 import { CouponInventoryComponent } from './components/coupon-inventory/coupon-inventory.component';
+import { CouponsResolver } from './resolvers/coupons.resolver';
 
 const routes: Routes = [
   { path: '', component: ApplePieComponent, canActivate: [AuthGuard] },
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'generate-register-link', component: GenerateRegisterLinkComponent, canActivate: [AdminGuard] },
   { path: 'register/:regToken', component: RegisterComponent, canActivate: [RegisterGuard] },
   { path: 'user-management', component: UserManagementComponent, canActivate: [AdminGuard] },
-  { path: 'coupons', component: CouponInventoryComponent, canActivate: [AuthGuard] },
+  { path: 'coupons', component: CouponInventoryComponent, canActivate: [AuthGuard], resolve: { coupons: CouponsResolver }, },
   { path: '**', component: LoginComponent, pathMatch: 'full', canActivate: [LoginGuard] }
 ];
 
