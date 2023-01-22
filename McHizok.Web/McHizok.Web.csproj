@@ -45,4 +45,10 @@
     <ProjectReference Include="..\McHizok.Entities\McHizok.Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="dummyCoupon.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
