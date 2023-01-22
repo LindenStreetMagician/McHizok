@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
 import { User } from 'src/app/models/user.model';
@@ -10,16 +11,16 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-management.component.css']
 })
 export class UserManagementComponent implements OnInit, OnDestroy {
-  Users: User[] = [];
+  users: User[] = [];
   private ngUnsubscribe = new Subject;
 
-  constructor(private userService: UserService, private toastr: ToastrService) { }
+  constructor(private route: ActivatedRoute,
+    private userService: UserService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.userService.getUsers().pipe(takeUntil(this.ngUnsubscribe)).subscribe({
-      next: (users) => {
-        this.Users = users;
-      }
+    this.route.data.subscribe(data => {
+      this.users = data['users'];
     });
   }
 
@@ -27,8 +28,8 @@ export class UserManagementComponent implements OnInit, OnDestroy {
     if (window.confirm(`Delete ${user.userName}? (made for: ${user.accountFor})`)) {
       this.userService.deleteUser(user.userId).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
         next: () => {
-          let index = this.Users.indexOf(user);
-          this.Users.splice(index, 1);
+          let index = this.users.indexOf(user);
+          this.users.splice(index, 1);
 
           this.toastr.success(`${user.userName} was deleted successfully.`);
         }
