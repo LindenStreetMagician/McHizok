@@ -3,6 +3,7 @@ using McHizok.Services.Interfaces;
 using McHizok.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace McHizok.Web.Controllers;
 
@@ -14,6 +15,7 @@ public class ApplePieController : ControllerBase
     private readonly IApplePieService _applePieService;
     private readonly ICouponInventoryService _couponInventoryService;
     private readonly ILogger<ApplePieController> _logger;
+    private const string dummyBlockCode = "mcbracadabra";
 
     public ApplePieController(IApplePieService applePieService, ICouponInventoryService couponInventoryService, ILogger<ApplePieController> logger)
     {
@@ -25,6 +27,13 @@ public class ApplePieController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetCoupon([FromQuery] string blockCode)
     {
+        var adminClaim = User.Claims.FirstOrDefault(c => c.Value == "Admin");
+
+        if (adminClaim is not null && blockCode == dummyBlockCode)
+        {
+            return Ok(GetDummyCoupon());
+        }
+
         var coupon = await _applePieService.GetApplePieCouponAsync(blockCode);
 
         _logger.LogInformation($"Coupon was created for {User.Identity.Name} with code: {blockCode}");
@@ -57,5 +66,15 @@ public class ApplePieController : ControllerBase
         await _couponInventoryService.DeleteCouponAsync(couponId);
 
         return NoContent();
+    }
+
+    private CouponDto GetDummyCoupon()
+    {
+        var expiresAt = DateTime.Now.AddDays(7);
+        var couponCode = "DummyCouponCode";
+        var fileBytes = System.IO.File.ReadAllBytes(@"dummyCoupon.jpeg");
+        var fileName = $"{couponCode} expires {expiresAt:MM-dd}.jpeg";
+
+        return new CouponDto(Guid.NewGuid(), Convert.ToBase64String(fileBytes), fileName, expiresAt, couponCode, string.Empty);
     }
 }
