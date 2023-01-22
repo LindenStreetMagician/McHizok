@@ -5,13 +5,13 @@
             <thead>
                 <tr>
                     <th class="text-center">#</th>
-                    <th style="width: 100px;">Coupon</th>
-                    <th>Expiry</th>
+                    <th class="text-center" style="width: 130px;">Coupon</th>
+                    <th class="text-center">Expiry</th>
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody *ngIf="userCoupons.length > 0">
-                <tr *ngFor="let coupon of userCoupons; let i = index">
+                <tr *ngFor="let coupon of userCoupons; let i = index" style="height: 165px;">
                     <td class="text-center align-middle">{{i+1}}</td>
                     <td class="text-center align-middle" style="height:fit-content; cursor: pointer;"
                         (click)="onClickShowCoupon(coupon)">
