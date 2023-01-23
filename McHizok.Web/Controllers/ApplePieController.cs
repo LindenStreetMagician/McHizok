@@ -30,6 +30,7 @@ public class ApplePieController : ControllerBase
 
         if (adminClaim is not null && blockCode == dummyBlockCode)
         {
+            await Task.Delay(2000);
             return Ok(GetDummyCoupon());
         }
 
