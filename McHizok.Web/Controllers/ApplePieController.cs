@@ -1,5 +1,4 @@
 ﻿using McHizok.Entities.DataTransferObjects;
-using McHizok.Services.Interfaces;
 using McHizok.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
