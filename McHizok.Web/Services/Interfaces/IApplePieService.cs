@@ -1,10 +1,7 @@
 ﻿using McHizok.Entities.DataTransferObjects;
 
-namespace McHizok.Services.Interfaces
-
+namespace McHizok.Web.Services.Interfaces;
+public interface IApplePieService
 {
-    public interface IApplePieService
-    {
-        Task<CouponDto> GetApplePieCouponAsync(string blockCode);
-    }
+    Task<CouponDto> GetApplePieCouponAsync(string blockCode);
 }

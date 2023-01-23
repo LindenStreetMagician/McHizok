@@ -2,7 +2,7 @@
 using McHizok.Entities.Exceptions;
 using McHizok.Entities.Extensions;
 using McHizok.Entities.Models.InputForm;
-using McHizok.Services.Interfaces;
+using McHizok.Web.Services.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
-namespace McHizok.Services;
+namespace McHizok.Web.Services;
 
 public class ApplePieService : IApplePieService
 {

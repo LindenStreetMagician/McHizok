@@ -26,8 +26,18 @@ export class RegisterComponent implements OnDestroy {
   }
 
   register() {
+    if (this.registerRequest.userName.length < 6 || this.registerRequest.userName.length > 15) {
+      this.toastr.error('The username must be at least 6 characters, but less than 15.');
+      return;
+    }
+
     if (this.registerRequest.password.length < 10) {
       this.toastr.error('The password length must be least 10 characters.');
+      return;
+    }
+
+    if (!/[0-9]/.test(this.registerRequest.password)) {
+      this.toastr.error('The password must contain at least 1 number.');
       return;
     }
 

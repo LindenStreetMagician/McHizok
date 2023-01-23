@@ -2,7 +2,7 @@
 using McHizok.Entities.Models.Register;
 using Microsoft.AspNetCore.Identity;
 
-namespace McHizok.Services.Interfaces;
+namespace McHizok.Web.Services.Interfaces;
 
 public interface IUserService
 {

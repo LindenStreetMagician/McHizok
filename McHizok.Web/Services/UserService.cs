@@ -1,12 +1,12 @@
 ﻿using McHizok.Entities.DataTransferObjects;
 using McHizok.Entities.Exceptions;
 using McHizok.Entities.Models.Register;
-using McHizok.Services.Interfaces;
+using McHizok.Web.Services.Interfaces;
 using McHizok.Web.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace McHizok.Services;
+namespace McHizok.Web.Services;
 
 public class UserService : IUserService
 {
@@ -78,7 +78,13 @@ public class UserService : IUserService
 
     public async Task<IEnumerable<UserDto>> GetUsersAsync()
     {
-        return await _mcHizokDbContext.Users.Select(u => new UserDto(u.Id, u.UserName, u.AccountFor)).ToListAsync();
+        var adminUsers = await _userManager.GetUsersInRoleAsync("Admin");
+
+        return await _mcHizokDbContext.Users
+                                      .Where(u => !adminUsers.Contains(u))
+                                      .Select(u => new UserDto(u.Id, u.UserName, u.AccountFor))
+                                      .ToListAsync();
+
     }
 
     public async Task DeleteUserAsync(string userId)

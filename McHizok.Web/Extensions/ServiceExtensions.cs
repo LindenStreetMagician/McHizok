@@ -1,14 +1,12 @@
-﻿using McHizok.Entities.Models;
-using McHizok.Services;
-using McHizok.Services.Interfaces;
+﻿using McHizok.Entities.Models.Configuration;
+using McHizok.Web.Services;
+using McHizok.Web.Services.Interfaces;
 using McHizok.Web.Data;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using McHizok.Web.Services.Interfaces;
-using McHizok.Web.Services;
 
 namespace McHizok.Web.Extensions;
 
@@ -22,11 +20,13 @@ public static class ServiceExtensions
         services.AddScoped<ICouponInventoryService, CouponInventoryService>();
     }
 
-    public static void ConfigureSqlContext(this IServiceCollection services) =>
+    public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
         services.AddDbContext<McHizokDbContext>(options =>
         {
-            //TODO:Move to IOptions
-            var connectionString = "server=localhost;port=3306;database=mchizok;uid=root";
+            var dbSettings = configuration.GetSection("DbSettings").Get<DbSettings>();
+
+            var connectionString = $"server={dbSettings.Server};port={dbSettings.Port};database={dbSettings.Database};uid={dbSettings.Uid};password={dbSettings.Password}";
+
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         });
 

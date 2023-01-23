@@ -1,6 +1,6 @@
 ﻿using McHizok.Entities.ErrorModel;
 using McHizok.Entities.Models.Login;
-using McHizok.Services.Interfaces;
+using McHizok.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace McHizok.Web.Controllers;

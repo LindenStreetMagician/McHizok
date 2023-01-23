@@ -1,7 +1,6 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
 import { catchError, Observable } from "rxjs";
 import { AuthService } from "../services/auth.service";
 
@@ -9,7 +8,7 @@ import { AuthService } from "../services/auth.service";
     providedIn: 'root'
 })
 export class AuthInterceptor implements HttpInterceptor {
-    constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) { }
+    constructor(private authService: AuthService, private router: Router) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         var token = this.authService.getToken();

@@ -15,7 +15,9 @@ export class GenerateRegisterLinkComponent implements OnDestroy {
   registrationUrl: string = '';
   private ngUnsubscribe = new Subject;
 
-  constructor(private toastr: ToastrService, private userService: UserService, private clipboard: Clipboard) { }
+  constructor(private toastr: ToastrService,
+    private userService: UserService,
+    private clipboard: Clipboard) { }
 
   onClickGenerate() {
     if (this.accountFor == "") {

@@ -1,7 +1,5 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
 import { LoginRequest } from '../../models/login-request.model';
 import { AuthService } from '../../services/auth.service';
@@ -15,7 +13,8 @@ export class LoginComponent implements OnDestroy {
   public loginRequest = <LoginRequest>{};
   private ngUnsubscribe = new Subject;
 
-  constructor(public authService: AuthService, private toastr: ToastrService, private router: Router) { }
+  constructor(public authService: AuthService,
+    private router: Router) { }
 
   login() {
     this.authService.login(this.loginRequest).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
@@ -23,10 +22,6 @@ export class LoginComponent implements OnDestroy {
         this.router.navigate(['/']);
       }
     })
-  }
-
-  logout() {
-    this.authService.logout();
   }
 
   ngOnDestroy(): void {

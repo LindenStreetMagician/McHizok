@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
 import { Coupon } from 'src/app/models/coupon.model';
@@ -16,16 +17,15 @@ export class CouponInventoryComponent implements OnInit {
   private ngUnsubscribe = new Subject;
   userCoupons: Coupon[] = [];
 
-  constructor(private couponInventoryService: CouponInventoryService, private authService: AuthService, private toastr: ToastrService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private couponInventoryService: CouponInventoryService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.couponInventoryService.getUserCoupons(this.authService.getLoggedInUserId())
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (coupons) => {
-          this.userCoupons = coupons;
-        }
-      });
+    this.route.data.subscribe(data => {
+      this.userCoupons = data['coupons'];
+    });
   }
 
   onClickDelete(coupon: Coupon) {
@@ -55,7 +55,6 @@ export class CouponInventoryComponent implements OnInit {
   }
 
   private deleteCoupon(coupon: Coupon) {
-    console.log(coupon);
     this.couponInventoryService.deleteCoupon(coupon)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({

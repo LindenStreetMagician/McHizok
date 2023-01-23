@@ -33,7 +33,8 @@ import { CouponInventoryComponent } from './components/coupon-inventory/coupon-i
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right'
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true
     }),
     NgxSpinnerModule,
     ClipboardModule,

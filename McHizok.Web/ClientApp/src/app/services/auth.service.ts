@@ -82,6 +82,11 @@ export class AuthService {
   }
 
   private getTokenDetails(token: string) {
+    if (token == null) {
+      this.logout();
+      return "";
+    }
+
     return JSON.parse(atob(token!.split('.')[1]));
   }
 
