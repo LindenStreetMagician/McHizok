@@ -71,7 +71,7 @@ public class ApplePieController : ControllerBase
     private CouponDto GetDummyCoupon()
     {
         var expiresAt = DateTime.Now.AddDays(7);
-        var couponCode = "DummyCouponCode";
+        var couponCode = "CouponCode";
         var fileBytes = System.IO.File.ReadAllBytes(@"dummyCoupon.jpeg");
         var fileName = $"{couponCode} expires {expiresAt:MM-dd}.jpeg";
 
