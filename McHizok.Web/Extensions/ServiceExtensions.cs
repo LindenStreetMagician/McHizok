@@ -1,15 +1,12 @@
-﻿using McHizok.Entities.Models;
-using McHizok.Services;
-using McHizok.Services.Interfaces;
+﻿using McHizok.Entities.Models.Configuration;
+using McHizok.Web.Services;
+using McHizok.Web.Services.Interfaces;
 using McHizok.Web.Data;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using McHizok.Web.Services.Interfaces;
-using McHizok.Web.Services;
-using McHizok.Entities.Models.Configuration;
 
 namespace McHizok.Web.Extensions;
 

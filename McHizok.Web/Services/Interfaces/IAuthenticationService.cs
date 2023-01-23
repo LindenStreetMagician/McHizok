@@ -1,6 +1,6 @@
 ﻿using McHizok.Entities.Models.Login;
 
-namespace McHizok.Services.Interfaces;
+namespace McHizok.Web.Services.Interfaces;
 
 public interface IAuthenticationService
 {

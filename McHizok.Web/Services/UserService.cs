@@ -1,12 +1,12 @@
 ﻿using McHizok.Entities.DataTransferObjects;
 using McHizok.Entities.Exceptions;
 using McHizok.Entities.Models.Register;
-using McHizok.Services.Interfaces;
+using McHizok.Web.Services.Interfaces;
 using McHizok.Web.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace McHizok.Services;
+namespace McHizok.Web.Services;
 
 public class UserService : IUserService
 {
