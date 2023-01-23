@@ -1,7 +1,7 @@
 # McHizok
 
 <a href="#">
-    <img src="readme/got_fat_bun.png" alt="Mchizok" align="right" title="Mchizok" height="60" />
+    <img src="Readme/got_fat_bun.png" alt="Mchizok" align="right" title="Mchizok" height="60" />
 </a>
 
 ## Long story short
@@ -12,7 +12,7 @@
 * Here we are
 
 <p align="center">
-    <img src="readme/mchizok.gif"/>
+    <img src="Readme/mchizok.gif"/>
 </p>
 
 ## The project name
