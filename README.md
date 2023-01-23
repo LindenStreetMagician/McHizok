@@ -15,6 +15,13 @@
     <img src="Readme/mchizok.gif"/>
 </p>
 
+## Features
+
+* Authentication / Authorization
+* Generating one time registration link
+* Storing existing coupons for later use
+* Downloading coupons
+
 ## The project name
 
 The name comes from a word play.
