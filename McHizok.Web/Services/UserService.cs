@@ -54,7 +54,7 @@ public class UserService : IUserService
 
     public async Task<IdentityResult> RegisterUserAsync(RegisterRequest registerRequest)
     {
-        var registration = _mcHizokDbContext.Registrations.First(x => x.RegistrationToken == registerRequest.RegistrationToken);
+        var registration = await _mcHizokDbContext.Registrations.FirstOrDefaultAsync(x => x.RegistrationToken == registerRequest.RegistrationToken);
 
         if (registration is null)
             throw new RegistrationTokenNotProvidedBadRequestException();
