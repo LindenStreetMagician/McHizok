@@ -1,5 +1,6 @@
 using McHizok.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseRewriter(new RewriteOptions()
+    .AddRedirectToNonWwwPermanent()
+    .AddRedirectToHttps());
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
