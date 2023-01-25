@@ -11,6 +11,4 @@ public record RegisterRequest
     public string? Password { get; init; }
 
     public string? RegistrationToken { get; set; }
-
-    public ICollection<string>? Roles { get; init; }
 }

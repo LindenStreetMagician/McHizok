@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using McHizok.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
@@ -9,7 +10,9 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     options.SuppressModelStateInvalidFilter = true;
 });
 
-builder.Services.AddApplicationInsightsTelemetry(options => options.EnableDependencyTrackingTelemetryModule = false );
+builder.Services.AddApplicationInsightsTelemetry(options => options.EnableDependencyTrackingTelemetryModule = false);
+builder.Services.ConfigureRateLimitingOptions();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors();
@@ -26,15 +29,14 @@ app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("ht
 
 app.ConfigureExceptionHandler();
 
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseHsts();
 }
 
+app.UseIpRateLimiting();
 app.UseRewriter(new RewriteOptions()
-    .AddRedirectToNonWwwPermanent()
-    .AddRedirectToHttps());
+    .AddRedirectToNonWwwPermanent());
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
