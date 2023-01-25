@@ -64,6 +64,12 @@ public static class ServiceExtensions
                 Endpoint = "get:/api/users/validate",
                 Limit = 3,
                 Period = "15m"
+            },
+            new RateLimitRule
+            {
+                Endpoint = "post:api/authentication/login",
+                Limit = 15,
+                Period = "20m"
             }
         };
 
