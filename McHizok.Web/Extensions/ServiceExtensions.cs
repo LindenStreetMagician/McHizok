@@ -37,6 +37,7 @@ public static class ServiceExtensions
     {
         var builder = services.AddIdentity<User, IdentityRole>(o =>
         {
+            o.User.AllowedUserNameCharacters = "aábcdeéfghiíjklmnoóöőpqrstuúüűvwxyzAÁBCDEÉFGHIÍJKLMNOÓÖŐPQRSTUÚÜŰVWXYZ0123456789-._@+";
             o.Password.RequireDigit = true;
             o.Password.RequireLowercase = false;
             o.Password.RequireUppercase = false;
