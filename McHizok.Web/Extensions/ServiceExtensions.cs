@@ -57,25 +57,25 @@ public static class ServiceExtensions
             new RateLimitRule
             {
                 Endpoint = "post:/api/users/register",
-                Limit = 3,
+                Limit = 10,
                 Period = "15m"
             },
             new RateLimitRule
             {
                 Endpoint = "get:/api/users/validate",
-                Limit = 3,
+                Limit = 20,
                 Period = "15m"
             },
             new RateLimitRule
             {
                 Endpoint = "post:api/authentication/login",
                 Limit = 15,
-                Period = "20m"
+                Period = "5m"
             }
         };
 
         services.Configure<IpRateLimitOptions>(opt => {
-            opt.EnableEndpointRateLimiting= true;
+            opt.EnableEndpointRateLimiting = true;
             opt.QuotaExceededMessage = "Woah-Woah-Woah! Slow the 🦆 down with those requests! You are in timeout for: {2}";
             opt.GeneralRules = rateLimitRules;
         });
