@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -51,6 +52,14 @@ export class RegisterComponent implements OnDestroy {
         this.authService.logout();
         this.router.navigate(['/login']);
       },
+      error: (error: HttpErrorResponse) => {
+        if (error.status == 429) {
+          this.toastr.error(error.error);
+        }
+        else {
+          throw error;
+        }
+      }
     })
   }
 

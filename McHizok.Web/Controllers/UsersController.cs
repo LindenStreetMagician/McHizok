@@ -1,4 +1,5 @@
-﻿using McHizok.Entities.Models.Register;
+﻿using McHizok.Entities.Exceptions;
+using McHizok.Entities.Models.Register;
 using McHizok.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,12 @@ namespace McHizok.Web.Controllers;
 public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly ILogger<UsersController> _logger;
 
-    public UsersController(IUserService userService)
+    public UsersController(IUserService userService, ILogger<UsersController> logger)
     {
         _userService = userService;
+        _logger = logger;
     }
 
     [HttpGet("generate")]
@@ -55,11 +58,8 @@ public class UsersController : ControllerBase
 
         if (!result.Succeeded)
         {
-            foreach (var error in result.Errors)
-            {
-                ModelState.TryAddModelError(error.Code, error.Description);
-            }
-            return BadRequest(ModelState);
+            _logger.LogError("User creation failed", result.Errors);
+            throw new InvalidUsernameBadRequestException();
         }
 
         return StatusCode(201);
