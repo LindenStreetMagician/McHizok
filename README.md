@@ -18,6 +18,7 @@
 ## Features
 
 * Authentication / Authorization
+* API rate limiting
 * Generating one time registration link
 * Storing existing coupons for later use
 * Downloading coupons
