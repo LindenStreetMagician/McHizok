@@ -15,6 +15,10 @@ export class ErrorService {
     }
 
     getServerMessage(error: HttpErrorResponse) {
+        if (error.status == 0) {
+            return "The server is currently unavailable. Try again later.";
+        }
+
         if (error.error?.message) {
             return error.error.message;
         }

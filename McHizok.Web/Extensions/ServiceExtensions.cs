@@ -8,8 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using AspNetCoreRateLimit;
-using OpenQA.Selenium.DevTools.V105.Profiler;
-using McHizok.Entities.ErrorModel;
 
 namespace McHizok.Web.Extensions;
 
