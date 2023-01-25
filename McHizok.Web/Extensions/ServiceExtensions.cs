@@ -66,7 +66,7 @@ public static class ServiceExtensions
             },
             new RateLimitRule
             {
-                Endpoint = "post:api/authentication/login",
+                Endpoint = "post:/api/authentication/login",
                 Limit = 15,
                 Period = "5m"
             }
