@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McHizok.Web", "McHizok.Web\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McHizok.Entities", "McHizok.Entities\McHizok.Entities.csproj", "{1C81D3AE-F84A-4C6D-B6BC-4376D4B4113A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McHizok.Tests", "McHizok.Tests\McHizok.Tests.csproj", "{A4E1A752-FC3D-491D-9F47-328C644C281C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1C81D3AE-F84A-4C6D-B6BC-4376D4B4113A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C81D3AE-F84A-4C6D-B6BC-4376D4B4113A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C81D3AE-F84A-4C6D-B6BC-4376D4B4113A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4E1A752-FC3D-491D-9F47-328C644C281C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4E1A752-FC3D-491D-9F47-328C644C281C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4E1A752-FC3D-491D-9F47-328C644C281C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4E1A752-FC3D-491D-9F47-328C644C281C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
