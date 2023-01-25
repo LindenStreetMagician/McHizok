@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using McHizok.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
@@ -9,7 +10,9 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     options.SuppressModelStateInvalidFilter = true;
 });
 
-builder.Services.AddApplicationInsightsTelemetry(options => options.EnableDependencyTrackingTelemetryModule = false );
+builder.Services.AddApplicationInsightsTelemetry(options => options.EnableDependencyTrackingTelemetryModule = false);
+builder.Services.ConfigureRateLimitingOptions();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors();
@@ -32,6 +35,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseIpRateLimiting();
 app.UseRewriter(new RewriteOptions()
     .AddRedirectToNonWwwPermanent()
     .AddRedirectToHttps());
