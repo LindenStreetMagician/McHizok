@@ -29,16 +29,14 @@ app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("ht
 
 app.ConfigureExceptionHandler();
 
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseHsts();
 }
 
 app.UseIpRateLimiting();
 app.UseRewriter(new RewriteOptions()
-    .AddRedirectToNonWwwPermanent()
-    .AddRedirectToHttps());
+    .AddRedirectToNonWwwPermanent());
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
