@@ -75,7 +75,7 @@ public static class ServiceExtensions
 
         services.Configure<IpRateLimitOptions>(opt => {
             opt.EnableEndpointRateLimiting= true;
-            opt.QuotaExceededMessage = "Woah-Woah-Woah! Slow the 🦆 down with those requests!";
+            opt.QuotaExceededMessage = "Woah-Woah-Woah! Slow the 🦆 down with those requests! You are in timeout for: {2}";
             opt.GeneralRules = rateLimitRules;
         });
         services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
