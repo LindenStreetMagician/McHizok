@@ -15,7 +15,7 @@ public class CouponInventoryService : ICouponInventoryService
         _mcHizokDbContext = mcHizokDbContext;
     }
 
-    public async Task<IEnumerable<CouponDto>> GetCouponsAsync(string userId)
+    public async Task<IEnumerable<CouponDto>> GetCouponsForUserAsync(string userId)
     {
         return await _mcHizokDbContext.CouponInventories
                                       .Where(c => c.User.Id == userId)
