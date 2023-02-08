@@ -6,44 +6,45 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using McHizok.Entities.Models.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace McHizok.Web.Services;
 
 public class AuthenticationService : IAuthenticationService
 {
     private readonly UserManager<User> _userManager;
-    private readonly IConfiguration _configuration;
+    private readonly JwtSettingsOptions _jwtSettings;
     private readonly ILogger<AuthenticationService> _logger;
-    private User? _user;
 
-    public AuthenticationService(UserManager<User> userManager, IConfiguration configuration, ILogger<AuthenticationService> logger)
+    public AuthenticationService(UserManager<User> userManager, ILogger<AuthenticationService> logger, IOptions<JwtSettingsOptions> jwtSettings)
     {
         _userManager = userManager;
-        _configuration = configuration;
         _logger = logger;
+        _jwtSettings = jwtSettings.Value;
     }
 
-    public async Task<string> CreateTokenAsync()
+    public async Task<string> CreateTokenAsync(User user)
     {
         var signingCredentials = GetSigningCredentials();
-        var claims = await GetClaimsAsync();
+        var claims = await GetClaimsAsync(user);
         var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
 
         return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
     }
 
-    public async Task<bool> ValidateUserAsync(LoginRequest loginRequest)
+    public async Task<(bool success, User? validatedUser)> ValidateUserAsync(LoginRequest loginRequest)
     {
-        _user = await _userManager.FindByNameAsync(loginRequest.UserName);
+        var user = await _userManager.FindByNameAsync(loginRequest.UserName);
 
-        var isUserValid = (_user is not null && await _userManager.CheckPasswordAsync(_user, loginRequest.Password));
+        var isUserValid = (user is not null && await _userManager.CheckPasswordAsync(user, loginRequest.Password));
 
         if (!isUserValid)
         {
             _logger.LogWarning($"Invalid credentials were provided. Username: {loginRequest.UserName}");
         }
 
-        return isUserValid;
+        return (isUserValid, user);
     }
 
     private SigningCredentials GetSigningCredentials()
@@ -54,15 +55,15 @@ public class AuthenticationService : IAuthenticationService
         return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
     }
 
-    private async Task<List<Claim>> GetClaimsAsync()
+    private async Task<List<Claim>> GetClaimsAsync(User user)
     {
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, _user.UserName),
-            new Claim(ClaimTypes.NameIdentifier, _user.Id)
+            new Claim(ClaimTypes.Name, user.UserName),
+            new Claim(ClaimTypes.NameIdentifier, user.Id)
         };
 
-        var roles = await _userManager.GetRolesAsync(_user);
+        var roles = await _userManager.GetRolesAsync(user);
         foreach (var role in roles)
         {
             claims.Add(new Claim(ClaimTypes.Role, role));
@@ -73,14 +74,12 @@ public class AuthenticationService : IAuthenticationService
 
     private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
     {
-        var jwtSettings = _configuration.GetSection("JwtSettings");
-
         var tokenOptions = new JwtSecurityToken
             (
-                issuer: jwtSettings["validIssuer"],
-                audience: jwtSettings["validAudience"],
+                issuer: _jwtSettings.ValidIssuer,
+                audience: _jwtSettings.ValidAudience,
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings["expires"])),
+                expires: DateTime.Now.AddMinutes(Convert.ToDouble(_jwtSettings.Expires)),
                 signingCredentials: signingCredentials
             );
 

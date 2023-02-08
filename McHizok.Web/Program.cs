@@ -17,7 +17,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors();
 builder.Services.AddSwaggerGen();
-builder.Services.ConfigureServices();
+builder.Services.ConfigureServices(builder.Configuration);
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddAuthentication();
 builder.Services.ConfigureIdentity();
