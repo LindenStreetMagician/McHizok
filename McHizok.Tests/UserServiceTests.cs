@@ -69,16 +69,16 @@ namespace McHizok.Tests
         }
 
         [Fact]
-        public void RegisterUserAsync_TokenDoesNotExistInDatabase_ThrowsRegistrationTokenNotProvidedBadRequestException()
+        public async Task RegisterUserAsync_TokenDoesNotExistInDatabase_ThrowsRegistrationTokenNotProvidedBadRequestException()
         {
-            var expectedException = new RegistrationTokenNotProvidedBadRequestException();
             var userToRegister = new RegisterRequest
             {
                 UserName = "Test",
                 Password = "Test"
             };
 
-            _ = Assert.ThrowsAsync<RegistrationTokenNotProvidedBadRequestException>(async () => await _userService.RegisterUserAsync(userToRegister));
+            var thrownException = await Assert.ThrowsAsync<RegistrationTokenNotProvidedBadRequestException>(() => _userService.RegisterUserAsync(userToRegister));
+            Assert.Equal("The provided token was invalid", thrownException.Message);
         }
 
         [Fact]
@@ -133,7 +133,7 @@ namespace McHizok.Tests
             await _mcHizokDbContext.Users.AddAsync(regularUser);
             await _mcHizokDbContext.SaveChangesAsync();
 
-            _userManagerMock.Setup(um => um.GetUsersInRoleAsync(It.IsAny<string>())).ReturnsAsync(new List<User> { adminUser });
+            _userManagerMock.Setup(um => um.GetUsersInRoleAsync("Admin")).ReturnsAsync(new List<User> { adminUser });
 
             var result = await _userService.GetUsersAsync();
 
@@ -141,9 +141,11 @@ namespace McHizok.Tests
         }
 
         [Fact]
-        public void DeleteUserAsync_UserDoesNotExist_ThrowsUserNotFoundException()
+        public async Task DeleteUserAsync_UserDoesNotExist_ThrowsUserNotFoundException()
         {
-            _ = Assert.ThrowsAsync<UserNotFoundException>(async () => await _userService.DeleteUserAsync("notExisitingUserId"));
+            var thrownException = await Assert.ThrowsAsync<UserNotFoundException>(() => _userService.DeleteUserAsync("notExistingUserId"));
+
+            Assert.Equal("The user with id: notExistingUserId doesn't exist in the database", thrownException.Message);
         }
 
         [Fact]
@@ -155,7 +157,7 @@ namespace McHizok.Tests
 
             await _userService.DeleteUserAsync(regularUser.Id);
 
-            Assert.DoesNotContain<User>(regularUser, _mcHizokDbContext.Users);
+            Assert.DoesNotContain(regularUser, _mcHizokDbContext.Users);
         }
 
         private async Task<string> CreateRegistrationToken()
