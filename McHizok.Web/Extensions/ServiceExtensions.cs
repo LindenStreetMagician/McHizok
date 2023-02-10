@@ -13,12 +13,13 @@ namespace McHizok.Web.Extensions;
 
 public static class ServiceExtensions
 {
-    public static void ConfigureServices(this IServiceCollection services)
+    public static void ConfigureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IApplePieService, ApplePieService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<ICouponInventoryService, CouponInventoryService>();
+        services.Configure<JwtSettingsOptions>(configuration.GetSection(JwtSettingsOptions.JwtSettings));
     }
 
     public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
