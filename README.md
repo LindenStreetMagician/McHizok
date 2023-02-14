@@ -1,4 +1,4 @@
-# McHizok
+# McHizok 🥧
 
 <a href="#">
     <img src="Readme/got_fat_bun.png" alt="Mchizok" align="right" title="Mchizok" height="100" />
@@ -29,3 +29,9 @@ The name comes from a word play.
 * In hungarian the word "Meghízok" means "I am getting fat"
 * Pronouncing the "Mc" from "McDonald's" sounds like "Meg"
 * Hence the name "McHizok", because of the applepies 👉👈
+
+## Improvement ideas for the future
+
+* Introduce the usage of refresh tokens
+* Implement delayed block code execution
+* Dockerize application
